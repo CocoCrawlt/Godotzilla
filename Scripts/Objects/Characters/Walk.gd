@@ -54,10 +54,13 @@ func move(delta: float) -> void:
 			player.velocity.y = 0
 	
 	# Crouch
-	if diry > 0.4 and player.body.sprite_frames.has_animation("Crouch"):
-		if player.animation_player.current_animation == "Idle"\
-			or player.animation_player.current_animation == "":
-			player.animation_player.play("Crouch")
+	if (diry > 0.4
+		and player.body.sprite_frames.has_animation("Crouch")
+		and player.state.current == PlayerCharacter.State.WALK
+		):
+			if player.animation_player.current_animation == "Idle"\
+				or player.animation_player.current_animation == "":
+				player.animation_player.play("Crouch")
 
 	if diry <= 0.4 and player.animation_player.current_animation == "Crouch":
 		player.animation_player.play("RESET")

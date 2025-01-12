@@ -17,11 +17,11 @@ func _process(_delta: float) -> void:
 		if (player.inputs_pressed[player.Inputs.A]
 			or player.inputs_pressed[player.Inputs.B]) \
 			and attack_timer.is_stopped():
-				player.use_attack(PlayerCharacter.Attack.EYE_BEAM)
+				player.attack.start_attack("EyeBeam")
 				attack_timer.start(0.2)
 		
 		if player.inputs_pressed[player.Inputs.START]:
-			player.use_attack(PlayerCharacter.Attack.WING_ATTACK)
+			player.attack.start_attack("WingAttack")
 
 func move(delta: float) -> void:
 	var xspeed: float = player.move_speed

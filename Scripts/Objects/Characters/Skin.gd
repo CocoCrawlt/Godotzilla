@@ -24,18 +24,22 @@ extends Node2D
 @export var attack_hitboxes: Node 
 @export var attacks: Array[AttackDescription]
 
-@onready var player: PlayerCharacter
+var player: PlayerCharacter
+var attack_state_node: Node
+var move_state_node: Node
 
 func _ready() -> void:
 	if get_parent() is PlayerCharacter:
 		player = get_parent()
+		attack_state_node = player.state.states_list[PlayerCharacter.State.ATTACK]
+		move_state_node = player.state.states_list[move_state]
 
 func walk_process() -> void:
 	pass
 
 func common_ground_attacks() -> void:
 	if player.inputs_pressed[PlayerCharacter.Inputs.A]:
-		player.use_attack(PlayerCharacter.Attack.PUNCH)
+		player.attack.start_attack("Punch")
 	if player.animation_player.current_animation != "Crouch" \
 		and player.inputs_pressed[PlayerCharacter.Inputs.B]:
-			player.use_attack(PlayerCharacter.Attack.KICK)
+			player.attack.start_attack("Kick")

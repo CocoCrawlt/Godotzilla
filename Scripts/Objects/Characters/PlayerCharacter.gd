@@ -19,20 +19,6 @@ enum State {
 	ATTACK,
 }
 
-enum Attack {
-	# Attacks that are common for ground characters
-	PUNCH,
-	KICK,
-	
-	# Godzilla attacks
-	TAIL_WHIP,
-	HEAT_BEAM,
-	
-	# Mothra attacks
-	EYE_BEAM,
-	WING_ATTACK,
-}
-
 const SKINS: Array[String] = [
 	"res://Objects/Characters/Godzilla.tscn",
 	"res://Objects/Characters/Mothra.tscn",
@@ -159,6 +145,7 @@ func setup_character(skin: PlayerSkin) -> void:
 	attack.hitboxes = skin.attack_hitboxes
 	attack.attack_animation_player = skin.attack_animation_player
 	attack.attacks.assign(skin.attacks)
+	attack.attack_function_node = skin
 	
 #region Input related
 	
@@ -200,11 +187,6 @@ func simulate_input_press(key: Inputs) -> void:
 	inputs_pressed[key] = false
 	
 #endregion
-
-func use_attack(type: Attack) -> void:
-	if not enable_attacks or state.current in [State.DEAD or State.LEVEL_INTRO]:
-		return
-	$StateMachine/Attack.use(type)
 	
 # Set the current xp level
 func set_level(value: int, sfx := false) -> void:
@@ -271,7 +253,7 @@ func is_hurtable() -> bool:
 
 func _on_health_damaged(_amount: float, hurt_time: float) -> void:
 	var attack_state := $StateMachine/Attack
-	if state.current == State.ATTACK and attack_state.current_attack == Attack.HEAT_BEAM:
+	if state.current == State.ATTACK and attack_state.current_attack == "HeatBeam":
 		hurt_time = 0
 		
 	if hurt_time < 0:

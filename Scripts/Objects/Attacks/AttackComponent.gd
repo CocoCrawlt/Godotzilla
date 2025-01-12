@@ -8,6 +8,8 @@ extends Node2D
 @export var initial_attack: String
 @export var attacks: Array[AttackDescription]
 @export var objects_to_ignore: Array[Node2D]
+@export_group("Advanced Attacks")
+@export var attack_function_node: Node
 
 @onready var area_2d: Area2D = $Area2D
 @onready var sfx_player: AudioStreamPlayer = $SFXPlayer
@@ -34,8 +36,11 @@ func _process(delta: float) -> void:
 			attack_bodies()
 	
 func start_attack(attack_name: String) -> void:
+	# An attack is still playing
+	if current_attack != null:
+		return
+		
 	# Find the attack description
-	current_attack = null
 	for attack_desc in attacks:
 		if attack_desc.name == attack_name:
 			current_attack = attack_desc
@@ -44,9 +49,25 @@ func start_attack(attack_name: String) -> void:
 		printerr("Unknown attack: " + attack_name)
 		return
 		
+	attack_started.emit(current_attack)
+	
+	if current_attack.simple_or_advanced == 0:
+		await start_simple_attack()
+	else:
+		await attack_function_node.call(current_attack.function_name)
+		
+	stop_attack()
+		
+func start_simple_attack() -> void:
 	sfx_player.stream = current_attack.sfx
 	sfx_player.play()
-	attack_started.emit(current_attack)
+	
+	if (current_attack.reset_animation_before
+		and is_instance_valid(attack_animation_player)
+		and attack_animation_player.has_animation("RESET")):
+			attack_animation_player.play("RESET")
+			
+	await get_tree().process_frame
 	
 	if current_attack.animation_name != "" and current_attack.animation_name2 != "":
 		variation = not variation
@@ -56,7 +77,7 @@ func start_attack(attack_name: String) -> void:
 		attack_animation_player.play(current_attack.animation_name)
 	elif (current_attack.time_length < 0.0
 		and current_attack.type != AttackDescription.Type.LASTS_FOREVER):
-			printerr("No attack animation was assigned to attack " + attack_name +
+			printerr("No attack animation was assigned to attack " + current_attack.name +
 				" but the Time Length property is still negative.")
 			return
 	
@@ -85,8 +106,6 @@ func start_attack(attack_name: String) -> void:
 		else:
 			await get_tree().create_timer(current_attack.time_length, false).timeout
 		
-		stop_attack()
-	
 func stop_attack() -> void:
 	if current_attack == null:
 		return
@@ -95,7 +114,8 @@ func stop_attack() -> void:
 	attack_finished.emit(save_attack)
 	set_hitbox_node(null, Vector2.ZERO)
 	attacked_bodies = []
-	if (save_attack.reset_animation_after
+	if (save_attack.simple_or_advanced == 0
+		and save_attack.reset_animation_after
 		and is_instance_valid(attack_animation_player)
 		and attack_animation_player.has_animation("RESET")):
 			attack_animation_player.play("RESET")
