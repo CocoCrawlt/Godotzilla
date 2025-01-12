@@ -222,8 +222,6 @@ move_speed = 2.0
 level_intro_y_offset = -40
 walk_frame_speed = 0.0
 jump_speed = 0
-step_sfx = ExtResource("2_p6fl7")
-roar_sfx = ExtResource("3_kfkrj")
 attacks = Array[ExtResource("4_piolj")]([SubResource("Resource_k6ggm"), SubResource("Resource_g6gog")])
 
 [node name="Body" type="AnimatedSprite2D" parent="."]

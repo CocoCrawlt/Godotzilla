@@ -15,10 +15,6 @@ extends Node2D
 @export var walk_frame_speed := 9.0
 @export var jump_speed := -2 * 60
 
-@export_group("Character-specific SFX")
-@export var step_sfx: AudioStream
-@export var roar_sfx: AudioStream
-
 @export_group("Attacks")
 @export var attack_animation_player: AnimationPlayer
 @export var attack_hitboxes: Node 
