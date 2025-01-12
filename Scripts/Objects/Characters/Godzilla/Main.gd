@@ -46,6 +46,7 @@ func attack_tail_whip_after() -> void:
 	else:
 		player.animation_player.play("RESET")
 
+# This function is referenced in the "Attacks" property of the skin object
 func attack_heat_beam() -> void:
 	var animations := [
 		["HeatBeam1", 0.1],

@@ -3,11 +3,7 @@ extends PlayerSkin
 #region Attacks
 const MothraParticle := preload("res://Objects/Characters/MothraParticle.tscn")
 
-var attack_functions: Dictionary = {
-	# Mothra-specific attacks
-	"EyeBeam": attack_eye_beam,
-	"WingAttack": attack_wing_attack,
-}
+# These functions are referenced in the "Attacks" property of the skin object
 
 func attack_eye_beam() -> void:
 	var particle := MothraParticle.instantiate()
