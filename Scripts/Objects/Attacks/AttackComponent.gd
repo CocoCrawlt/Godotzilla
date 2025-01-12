@@ -18,7 +18,6 @@ var current_attack: AttackDescription = null
 var variation := false
 # We don't want to attack a body multiple times in the same attack
 var attacked_bodies: Array[Node2D] = []
-var _attack_started := false
 
 signal body_attacked(body: Node2D, attack: AttackDescription)
 # DEPRECATED: Signal for compatibility reasons
@@ -82,15 +81,12 @@ func start_simple_attack() -> void:
 				" but the Time Length property is still negative.")
 			return
 	
-	if current_attack.start_time_offset <= 0.0:
-		_attack_started = true
-	else:
+	if current_attack.start_time_offset > 0.0:
 		await get_tree().create_timer(current_attack.start_time_offset, false).timeout
 		# The attack could've been requested to be stopped by now
 		# (For example, the player could've been hit)
 		if current_attack == null:
 			return
-		_attack_started = true
 	
 	if current_attack.hitbox_name != "":
 		set_hitbox_template(current_attack.hitbox_name)

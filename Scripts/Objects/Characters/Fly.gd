@@ -2,26 +2,15 @@ extends "res://Scripts/Objects/Characters/PlayerState.gd"
 
 const YLIMIT = 72
 var floor_checking: Area2D
-var attack_timer := Timer.new()
 
 func state_init() -> void:
 	floor_checking = player.get_node("MothraFloorChecking")
-	attack_timer.one_shot = true
-	add_child(attack_timer)
 
 func _physics_process(delta: float) -> void:
 	move(delta)
 		
 func _process(_delta: float) -> void:
-	if player.character == PlayerCharacter.Type.MOTHRA:
-		if (player.inputs_pressed[player.Inputs.A]
-			or player.inputs_pressed[player.Inputs.B]) \
-			and attack_timer.is_stopped():
-				player.attack.start_attack("EyeBeam")
-				attack_timer.start(0.2)
-		
-		if player.inputs_pressed[player.Inputs.START]:
-			player.attack.start_attack("WingAttack")
+	player.skin.fly_process()
 
 func move(delta: float) -> void:
 	var xspeed: float = player.move_speed

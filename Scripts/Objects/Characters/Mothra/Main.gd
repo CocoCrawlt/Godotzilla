@@ -1,5 +1,23 @@
 extends PlayerSkin
 
+var attack_timer := Timer.new()
+
+func _ready() -> void:
+	super._ready()
+	attack_timer.one_shot = true
+	add_child(attack_timer)
+
+func fly_process() -> void:
+	if player.character == PlayerCharacter.Type.MOTHRA:
+		if (player.inputs_pressed[player.Inputs.A]
+			or player.inputs_pressed[player.Inputs.B]) \
+			and attack_timer.is_stopped():
+				player.attack.start_attack("EyeBeam")
+				attack_timer.start(0.2)
+		
+		if player.inputs_pressed[player.Inputs.START]:
+			player.attack.start_attack("WingAttack")
+
 #region Attacks
 const MothraParticle := preload("res://Objects/Characters/MothraParticle.tscn")
 

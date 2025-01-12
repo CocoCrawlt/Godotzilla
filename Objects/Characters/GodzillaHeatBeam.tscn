@@ -189,6 +189,7 @@ animations = [{
 [sub_resource type="Resource" id="Resource_l0eq5"]
 script = ExtResource("4_t4p4k")
 name = "HeatBeam"
+simple_or_advanced = 0
 type = 1
 damage_amount = 24.0
 hitbox_name = ""
@@ -198,7 +199,9 @@ start_time_offset = 0.0
 animation_name = ""
 animation_name2 = ""
 time_length = 1.0
+reset_animation_before = true
 reset_animation_after = true
+function_name = ""
 
 [node name="GodzillaHeatBeam" type="AnimatedSprite2D"]
 sprite_frames = SubResource("SpriteFrames_5qopn")
