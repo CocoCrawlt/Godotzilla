@@ -26,7 +26,7 @@ func launch() -> void:
 		
 		var rocket := ROCKET_LAUNCHER_ROCKET.instantiate()
 		rocket.position = position + Vector2(7, -7)
-		get_parent().add_child(rocket)
+		add_sibling(rocket)
 		rocket.attack_component.objects_to_ignore.append(self)
 
 func _on_health_component_dead() -> void:
@@ -37,7 +37,7 @@ func _on_health_component_dead() -> void:
 	
 	var explosion := EXPLOSION.instantiate()
 	explosion.global_position = global_position
-	get_parent().add_child(explosion)
+	add_sibling(explosion)
 	
 	var capsule := CAPSULE.instantiate()
 	Global.get_current_scene().call_deferred("add_child", capsule)

@@ -38,12 +38,14 @@ drag_bottom_margin = 0.05
 [node name="LevelLayout" type="Node2D" parent="." index="2"]
 
 [node name="Rock1" type="Sprite2D" parent="LevelLayout" index="0"]
+z_index = -11
 position = Vector2(120, 176)
 texture = ExtResource("7_lqm77")
 region_enabled = true
 region_rect = Rect2(339, 142, 42, 64)
 
 [node name="Rock2" type="Sprite2D" parent="LevelLayout" index="1"]
+z_index = -11
 position = Vector2(160, 184)
 texture = ExtResource("7_lqm77")
 region_enabled = true
@@ -59,12 +61,14 @@ position = Vector2(304, 208)
 position = Vector2(336, 200)
 
 [node name="Rock3" type="Sprite2D" parent="LevelLayout" index="5"]
+z_index = -11
 position = Vector2(416, 176)
 texture = ExtResource("7_lqm77")
 region_enabled = true
 region_rect = Rect2(339, 142, 42, 64)
 
 [node name="Rock4" type="Sprite2D" parent="LevelLayout" index="6"]
+z_index = -11
 position = Vector2(360, 184)
 texture = ExtResource("7_lqm77")
 region_enabled = true
@@ -75,12 +79,14 @@ position = Vector2(472, 208)
 type = 2
 
 [node name="Rock5" type="Sprite2D" parent="LevelLayout" index="8"]
+z_index = -11
 position = Vector2(536, 184)
 texture = ExtResource("7_lqm77")
 region_enabled = true
 region_rect = Rect2(545, 217, 66, 48)
 
 [node name="Rock6" type="Sprite2D" parent="LevelLayout" index="9"]
+z_index = -11
 position = Vector2(600, 192)
 texture = ExtResource("7_lqm77")
 region_enabled = true
@@ -93,18 +99,21 @@ position = Vector2(568, 184)
 position = Vector2(600, 168)
 
 [node name="Rock7" type="Sprite2D" parent="LevelLayout" index="12"]
+z_index = -11
 position = Vector2(669, 176)
 texture = ExtResource("7_lqm77")
 region_enabled = true
 region_rect = Rect2(339, 142, 42, 64)
 
 [node name="Rock8" type="Sprite2D" parent="LevelLayout" index="13"]
+z_index = -11
 position = Vector2(757, 176)
 texture = ExtResource("7_lqm77")
 region_enabled = true
 region_rect = Rect2(339, 142, 42, 64)
 
 [node name="Rock9" type="Sprite2D" parent="LevelLayout" index="14"]
+z_index = -11
 position = Vector2(797, 176)
 texture = ExtResource("7_lqm77")
 region_enabled = true

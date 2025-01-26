@@ -10,6 +10,7 @@
 script = ExtResource("1_kceot")
 
 [node name="Background" type="Node2D" parent="."]
+z_index = -100
 
 [node name="Camera" type="Camera2D" parent="." node_paths=PackedStringArray("target")]
 position = Vector2(56, 120)
@@ -22,6 +23,7 @@ script = ExtResource("2_utxvs")
 target = NodePath("../Player")
 
 [node name="Floor" parent="." instance=ExtResource("4_tmjpl")]
+z_index = -10
 offset_top = 208.0
 offset_bottom = 240.0
 

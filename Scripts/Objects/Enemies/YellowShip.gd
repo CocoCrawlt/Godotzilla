@@ -27,5 +27,5 @@ func _on_health_component_dead() -> void:
 func _on_attack_component_attacked(_body: Node2D, _amount: float) -> void:
 	var explosion := EXPLOSION.instantiate()
 	explosion.global_position = global_position
-	get_parent().add_child(explosion)
+	add_sibling(explosion)
 	queue_free()

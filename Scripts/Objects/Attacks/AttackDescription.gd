@@ -9,13 +9,13 @@ enum Type {
 
 @export var name: String
 @export_enum("Simple:0", "Advanced:1") var simple_or_advanced: int
+@export var other_information: Array[String]
 
 @export_group("Simple Attack")
 @export var type: Type
 @export var damage_amount: float
 @export var hitbox_name: String
 @export var sfx: AudioStream
-@export var other_information: Array[String]
 
 @export_group("Simple Attack/Animation And Timing")
 ## Use -1.0 for the default value

@@ -52,11 +52,13 @@ func start_attack(attack_name: String) -> void:
 	
 	if current_attack.simple_or_advanced == 0:
 		await start_simple_attack()
-		if current_attack.type != AttackDescription.Type.LASTS_FOREVER:
-			stop_attack()
+		if (is_instance_valid(current_attack)
+			and current_attack.type != AttackDescription.Type.LASTS_FOREVER):
+				stop_attack()
 	else:
 		await attack_function_node.call(current_attack.function_name)
-		stop_attack()
+		if is_instance_valid(current_attack):
+			stop_attack()
 		
 func start_simple_attack() -> void:
 	sfx_player.stream = current_attack.sfx

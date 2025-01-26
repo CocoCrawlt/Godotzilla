@@ -16,5 +16,5 @@ func _on_attack_component_attacked(_body: Node2D, _amount: float) -> void:
 	destroy_sfx.play()
 	destroy_sfx.reparent(get_parent())
 	destroy_sfx.finished.connect(func() -> void: destroy_sfx.queue_free())
-	get_parent().add_child(explosion)
+	add_sibling(explosion)
 	queue_free()

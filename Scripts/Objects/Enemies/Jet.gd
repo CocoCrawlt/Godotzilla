@@ -38,7 +38,7 @@ func _process(delta: float) -> void:
 			if not launched_projectile and absf(velocity.x) < 0.04 * 60:
 				var projectile := JET_PROJECTILE.instantiate()
 				projectile.position = position
-				get_parent().add_child(projectile)
+				add_sibling(projectile)
 				projectile.attack_component.objects_to_ignore.append(self)
 				launched_projectile = true
 		
@@ -55,5 +55,5 @@ func _on_health_component_dead() -> void:
 	explosion.global_position = global_position
 	
 	start_destroy_sfx()
-	get_parent().add_child(explosion)
+	add_sibling(explosion)
 	queue_free()

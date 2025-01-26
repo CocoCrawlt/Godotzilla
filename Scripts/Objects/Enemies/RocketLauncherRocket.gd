@@ -31,7 +31,7 @@ func _process(delta: float) -> void:
 func _on_attack_component_attacked(_body: Node2D, _amount: float) -> void:
 	var explosion := EXPLOSION.instantiate()
 	explosion.global_position = global_position
-	get_parent().add_child(explosion)
+	add_sibling(explosion)
 	destroy_sfx.play()
 	destroy_sfx.reparent(get_parent())
 	destroy_sfx.finished.connect(func() -> void: destroy_sfx.queue_free())

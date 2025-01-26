@@ -79,18 +79,22 @@ uppercase = true
 position = Vector2(16, 8)
 
 [node name="Outline" type="TileMapLayer" parent="Board"]
+z_index = -5
 
 [node name="Board Icons" type="TileMapLayer" parent="Board"]
+z_index = -10
 tile_map_data = PackedByteArray("AAAAAAAAAQAAAAAAAAABAAEAAQAAAAAAAAABAAIAAQAAAAAAAAAAAAEAAQAAAAAAAAACAAEAAQAAAAAAAAACAAIAAQAAAAAAAAACAAMAAQAAAAAAAAABAAMAAQAAAAAAAAAAAAIAAQAAAAAAAAADAAMAAgAAAAAAAQA=")
 tile_set = SubResource("TileSet_8es2h")
 
 [node name="Board Pieces" type="Node2D" parent="Board/Board Icons"]
 unique_name_in_owner = true
+z_as_relative = false
 
 [node name="Godzilla" parent="Board/Board Icons/Board Pieces" instance=ExtResource("5_5kcnc")]
 position = Vector2(16, 24)
 
 [node name="Selector" parent="Board/Board Icons" node_paths=PackedStringArray("board_outline", "tilemap", "message_window", "board") instance=ExtResource("6_ysf6o")]
+z_as_relative = false
 position = Vector2(16, 24)
 board_outline = NodePath("../../Outline")
 tilemap = NodePath("..")
@@ -109,6 +113,7 @@ drag_bottom_margin = 0.1
 editor_draw_limits = true
 
 [node name="GUI" type="CanvasLayer" parent="Board"]
+layer = 5
 
 [node name="MessageWindow" parent="Board/GUI" node_paths=PackedStringArray("selector") instance=ExtResource("7_hcaag")]
 visible = false
