@@ -93,10 +93,10 @@ func start_simple_attack() -> void:
 	if current_attack.hitbox_name != "":
 		set_hitbox_template(current_attack.hitbox_name)
 		
-	# Not sure why I have to wait 2 frames for it to work
+	# Not sure why I have to wait 3 frames for it to work
 	if current_attack.type == AttackDescription.Type.ONE_TIME:
-		await get_tree().process_frame
-		await get_tree().process_frame
+		for i in 3:
+			await get_tree().process_frame
 		attack_bodies()
 		
 	if current_attack.type != AttackDescription.Type.LASTS_FOREVER:

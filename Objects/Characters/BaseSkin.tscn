@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://2kanj7crlbl5"]
+
+[ext_resource type="Script" path="res://Scripts/Objects/Characters/Skin.gd" id="1_qcc0a"]
+[ext_resource type="AudioStream" uid="uid://d2qfi7m3jxc5r" path="res://Audio/SFX/GodzillaStep.wav" id="14_w8djj"]
+[ext_resource type="AudioStream" uid="uid://cjhiq2x7oewnw" path="res://Audio/SFX/GodzillaRoar.wav" id="15_cfayp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d8cwk"]
+size = Vector2(20, 65)
+
+[node name="Character" type="Node2D" node_paths=PackedStringArray("attack_animation_player", "attack_hitboxes")]
+script = ExtResource("1_qcc0a")
+attack_animation_player = NodePath("AnimationPlayer")
+attack_hitboxes = NodePath("Hitboxes")
+
+[node name="Body" type="AnimatedSprite2D" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2(0, -5.5)
+shape = SubResource("RectangleShape2D_d8cwk")
+
+[node name="Hitboxes" type="Node" parent="."]
+
+[node name="SFX" type="Node" parent="."]
+
+[node name="Step" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("14_w8djj")
+bus = &"SFX"
+
+[node name="Roar" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("15_cfayp")
+bus = &"SFX"
+
+[connection signal="animation_started" from="AnimationPlayer" to="." method="_on_animation_started"]

@@ -1,22 +1,21 @@
-[gd_scene load_steps=76 format=3 uid="uid://d3shtbcndg6wf"]
+[gd_scene load_steps=74 format=3 uid="uid://cii02kmoys3xf"]
 
 [ext_resource type="Texture2D" uid="uid://c3qwhre32yggp" path="res://Sprites/Characters/Godzilla/walk_body.png" id="1_3sn8y"]
 [ext_resource type="Texture2D" uid="uid://c8vjp0lgjim3x" path="res://Sprites/Characters/Godzilla/crouch.png" id="1_7wdfd"]
 [ext_resource type="Script" path="res://Scripts/Objects/Characters/Godzilla/Main.gd" id="1_gfjpc"]
+[ext_resource type="PackedScene" uid="uid://2kanj7crlbl5" path="res://Objects/Characters/BaseSkin.tscn" id="1_u2lhu"]
 [ext_resource type="Texture2D" uid="uid://c7slof73fr1l6" path="res://Sprites/Characters/Godzilla/hurt.png" id="2_0y6ho"]
-[ext_resource type="AudioStream" uid="uid://d2qfi7m3jxc5r" path="res://Audio/SFX/GodzillaStep.wav" id="2_1c4ag"]
 [ext_resource type="Texture2D" uid="uid://drtem8jbie2f0" path="res://Sprites/Characters/Godzilla/heat_beaming.png" id="2_pgjrr"]
 [ext_resource type="Texture2D" uid="uid://huytihc5bj4n" path="res://Sprites/Characters/Godzilla/walk_head.png" id="2_rmc0n"]
 [ext_resource type="Texture2D" uid="uid://dr7cjajoy0wya" path="res://Sprites/Characters/Godzilla/kick1.png" id="2_s7teb"]
 [ext_resource type="Texture2D" uid="uid://bhjsxj2v3ms7" path="res://Sprites/Characters/Godzilla/punch1.png" id="3_64613"]
-[ext_resource type="AudioStream" uid="uid://cjhiq2x7oewnw" path="res://Audio/SFX/GodzillaRoar.wav" id="3_vj2ms"]
 [ext_resource type="Texture2D" uid="uid://b3aqq06ew63k8" path="res://Sprites/Characters/Godzilla/kick2.png" id="3_vxmse"]
 [ext_resource type="Texture2D" uid="uid://bsu6rokyd5rmu" path="res://Sprites/Characters/Godzilla/tail_whip.png" id="4_3ah1i"]
 [ext_resource type="Texture2D" uid="uid://cp7yo85faut6q" path="res://Sprites/Characters/Godzilla/punch2.png" id="4_7jbwm"]
 [ext_resource type="Script" path="res://Scripts/Objects/Attacks/AttackDescription.gd" id="4_myvd7"]
 [ext_resource type="AudioStream" uid="uid://deo2ts4xdwwce" path="res://Audio/SFX/CharPunch.wav" id="15_6hykl"]
 
-[sub_resource type="Resource" id="Resource_i1ivt"]
+[sub_resource type="Resource" id="Resource_knn82"]
 script = ExtResource("4_myvd7")
 name = "Punch"
 simple_or_advanced = 0
@@ -34,7 +33,7 @@ reset_animation_before = true
 reset_animation_after = true
 function_name = ""
 
-[sub_resource type="Resource" id="Resource_vdkid"]
+[sub_resource type="Resource" id="Resource_k066a"]
 script = ExtResource("4_myvd7")
 name = "Kick"
 simple_or_advanced = 0
@@ -52,7 +51,7 @@ reset_animation_before = true
 reset_animation_after = true
 function_name = ""
 
-[sub_resource type="Resource" id="Resource_tcgfr"]
+[sub_resource type="Resource" id="Resource_wvdb0"]
 script = ExtResource("4_myvd7")
 name = "TailWhip"
 simple_or_advanced = 0
@@ -69,7 +68,7 @@ reset_animation_before = false
 reset_animation_after = false
 function_name = ""
 
-[sub_resource type="Resource" id="Resource_pqe6j"]
+[sub_resource type="Resource" id="Resource_oxhfx"]
 script = ExtResource("4_myvd7")
 name = "HeatBeam"
 simple_or_advanced = 1
@@ -186,7 +185,7 @@ region = Rect2(93, 0, 93, 53)
 atlas = ExtResource("4_3ah1i")
 region = Rect2(186, 0, 93, 53)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_lp8b5"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_gkq6k"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -350,7 +349,7 @@ region = Rect2(0, 0, 60, 33)
 atlas = ExtResource("4_7jbwm")
 region = Rect2(60, 0, 60, 33)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_fkm46"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_r8ohj"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -975,7 +974,7 @@ tracks/3/keys = {
 "values": [0, 1, 2, 1, 0]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_m5kek"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bqais"]
 _data = {
 "Crouch": SubResource("Animation_gbymh"),
 "HeatBeam1": SubResource("Animation_1eids"),
@@ -990,80 +989,57 @@ _data = {
 "TailWhip": SubResource("Animation_57mnw")
 }
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_d8cwk"]
-size = Vector2(20, 65)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_wf06n"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5k7ce"]
 size = Vector2(20, 45)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_8277w"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oucpc"]
 size = Vector2(30, 18)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_6lyr4"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3r6xg"]
 size = Vector2(30, 26)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_oeti2"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7tuv5"]
 size = Vector2(50, 35)
 
-[node name="Character" type="Node2D" node_paths=PackedStringArray("attack_animation_player", "attack_hitboxes")]
+[node name="Character" instance=ExtResource("1_u2lhu")]
 script = ExtResource("1_gfjpc")
 character_name = "Godzilla"
-attack_animation_player = NodePath("AnimationPlayer")
-attack_hitboxes = NodePath("Hitboxes")
-attacks = Array[ExtResource("4_myvd7")]([SubResource("Resource_i1ivt"), SubResource("Resource_vdkid"), SubResource("Resource_tcgfr"), SubResource("Resource_pqe6j")])
+attacks = Array[ExtResource("4_myvd7")]([SubResource("Resource_knn82"), SubResource("Resource_k066a"), SubResource("Resource_wvdb0"), SubResource("Resource_oxhfx")])
 
-[node name="Body" type="AnimatedSprite2D" parent="."]
+[node name="Body" parent="." index="0"]
 position = Vector2(-16.5, 8.5)
-sprite_frames = SubResource("SpriteFrames_lp8b5")
+sprite_frames = SubResource("SpriteFrames_gkq6k")
 animation = &"Idle"
 
-[node name="Head" type="AnimatedSprite2D" parent="Body"]
+[node name="Head" type="AnimatedSprite2D" parent="Body" index="0"]
 position = Vector2(17, -32)
-sprite_frames = SubResource("SpriteFrames_fkm46")
+sprite_frames = SubResource("SpriteFrames_r8ohj")
 animation = &"Idle"
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="AnimationPlayer" parent="." index="1"]
 libraries = {
-"": SubResource("AnimationLibrary_m5kek")
+"": SubResource("AnimationLibrary_bqais")
 }
 
-[node name="Collision" type="CollisionShape2D" parent="."]
-position = Vector2(0, -5.5)
-shape = SubResource("RectangleShape2D_d8cwk")
-
-[node name="CrouchCollision" type="CollisionShape2D" parent="."]
+[node name="CrouchCollision" type="CollisionShape2D" parent="." index="3"]
 position = Vector2(0, 4.5)
-shape = SubResource("RectangleShape2D_wf06n")
+shape = SubResource("RectangleShape2D_5k7ce")
 
-[node name="Hitboxes" type="Node" parent="."]
-
-[node name="Punch" type="CollisionShape2D" parent="Hitboxes"]
+[node name="Punch" type="CollisionShape2D" parent="Hitboxes" index="0"]
 visible = false
 position = Vector2(20, -20)
-shape = SubResource("RectangleShape2D_8277w")
+shape = SubResource("RectangleShape2D_oucpc")
 
-[node name="Kick" type="CollisionShape2D" parent="Hitboxes"]
+[node name="Kick" type="CollisionShape2D" parent="Hitboxes" index="1"]
 visible = false
 position = Vector2(20, 12)
-shape = SubResource("RectangleShape2D_6lyr4")
+shape = SubResource("RectangleShape2D_3r6xg")
 
-[node name="TailWhip" type="CollisionShape2D" parent="Hitboxes"]
+[node name="TailWhip" type="CollisionShape2D" parent="Hitboxes" index="2"]
 visible = false
 position = Vector2(30, 5.5)
-shape = SubResource("RectangleShape2D_oeti2")
+shape = SubResource("RectangleShape2D_7tuv5")
 
-[node name="SFX" type="Node" parent="."]
-
-[node name="Step" type="AudioStreamPlayer" parent="SFX"]
-stream = ExtResource("2_1c4ag")
-bus = &"SFX"
-
-[node name="Roar" type="AudioStreamPlayer" parent="SFX"]
-stream = ExtResource("3_vj2ms")
-bus = &"SFX"
-
-[node name="Punch" type="AudioStreamPlayer" parent="SFX"]
+[node name="Punch" type="AudioStreamPlayer" parent="SFX" index="2"]
 stream = ExtResource("15_6hykl")
 bus = &"SFX"
-
-[connection signal="animation_started" from="AnimationPlayer" to="." method="_on_animation_started"]

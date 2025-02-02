@@ -133,15 +133,6 @@ func setup_character(skin: PlayerSkin) -> void:
 		position.x = skin.level_intro_x_start
 		position.y += skin.level_intro_y_offset
 	
-	var sfx_group := get_node("SFX")
-	if skin.has_node("SFX"):
-		for sfx: Node in skin.get_node("SFX").get_children():
-			if sfx is AudioStreamPlayer:
-				if sfx_group.has_node(NodePath(sfx.name)):
-					sfx_group.remove_child(sfx_group.get_node(NodePath(sfx.name)))
-				sfx.reparent(sfx_group)
-				
-	
 	attack.hitboxes = skin.attack_hitboxes
 	attack.attack_animation_player = skin.attack_animation_player
 	attack.attacks.assign(skin.attacks)
@@ -228,7 +219,10 @@ func add_xp(value: int) -> void:
 	xp_amount_changed.emit(xp)
 	
 func get_sfx(sfx_name: String) -> AudioStreamPlayer:
-	return get_node("SFX/" + sfx_name)
+	var path := "SFX/" + sfx_name
+	if skin.has_node(path):
+		return skin.get_node(path)
+	return get_node(path)
 	
 func play_sfx(sfx_name: String) -> AudioStreamPlayer:
 	var sfx := get_sfx(sfx_name)

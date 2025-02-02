@@ -1,14 +1,14 @@
-[gd_scene load_steps=25 format=3 uid="uid://cqrpbxce3xquu"]
+[gd_scene load_steps=25 format=3 uid="uid://bxqvrtbf0bm8p"]
 
 [ext_resource type="Texture2D" uid="uid://nhpib3frkqrg" path="res://Sprites/Characters/Mothra/hurt.png" id="1_64xd3"]
 [ext_resource type="Texture2D" uid="uid://dh0gtj20jut25" path="res://Sprites/Characters/Mothra/idle.png" id="1_f6h4m"]
 [ext_resource type="Script" path="res://Scripts/Objects/Characters/Mothra/Main.gd" id="1_p8tms"]
+[ext_resource type="PackedScene" uid="uid://2kanj7crlbl5" path="res://Objects/Characters/BaseSkin.tscn" id="1_q4ht6"]
 [ext_resource type="AudioStream" uid="uid://d3q5gj1fhphte" path="res://Audio/SFX/MothraStep.wav" id="2_p6fl7"]
 [ext_resource type="AudioStream" uid="uid://ccjlv2riqxvf3" path="res://Audio/SFX/MothraRoar.wav" id="3_kfkrj"]
 [ext_resource type="Script" path="res://Scripts/Objects/Attacks/AttackDescription.gd" id="4_piolj"]
-[ext_resource type="AudioStream" uid="uid://deo2ts4xdwwce" path="res://Audio/SFX/CharPunch.wav" id="6_ysyw7"]
 
-[sub_resource type="Resource" id="Resource_k6ggm"]
+[sub_resource type="Resource" id="Resource_l3d0x"]
 script = ExtResource("4_piolj")
 name = "EyeBeam"
 simple_or_advanced = 1
@@ -25,7 +25,7 @@ reset_animation_before = true
 reset_animation_after = true
 function_name = "attack_eye_beam"
 
-[sub_resource type="Resource" id="Resource_g6gog"]
+[sub_resource type="Resource" id="Resource_tkeyd"]
 script = ExtResource("4_piolj")
 name = "WingAttack"
 simple_or_advanced = 1
@@ -78,7 +78,7 @@ region = Rect2(54, 0, 54, 76)
 atlas = ExtResource("1_f6h4m")
 region = Rect2(108, 0, 54, 76)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_ihex8"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_amh6r"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -203,53 +203,41 @@ tracks/1/keys = {
 "values": [0]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_n42rb"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fqsl6"]
 _data = {
 "Hurt": SubResource("Animation_6mr3k"),
 "Idle": SubResource("Animation_bsg1t"),
 "RESET": SubResource("Animation_5r2jb")
 }
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ta221"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_75xht"]
 size = Vector2(36, 14)
 
-[node name="Mothra" type="Node2D"]
+[node name="Character" instance=ExtResource("1_q4ht6")]
 script = ExtResource("1_p8tms")
 character_name = "Mothra"
 bar_count = 8
 move_state = 1
 move_speed = 2.0
 level_intro_y_offset = -40
-walk_frame_speed = 0.0
-jump_speed = 0
-attacks = Array[ExtResource("4_piolj")]([SubResource("Resource_k6ggm"), SubResource("Resource_g6gog")])
+attacks = Array[ExtResource("4_piolj")]([SubResource("Resource_l3d0x"), SubResource("Resource_tkeyd")])
 
-[node name="Body" type="AnimatedSprite2D" parent="."]
+[node name="Body" parent="." index="0"]
 position = Vector2(-12, -28)
-sprite_frames = SubResource("SpriteFrames_ihex8")
+sprite_frames = SubResource("SpriteFrames_amh6r")
 animation = &"idle"
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="AnimationPlayer" parent="." index="1"]
 libraries = {
-"": SubResource("AnimationLibrary_n42rb")
+"": SubResource("AnimationLibrary_fqsl6")
 }
 
-[node name="Collision" type="CollisionShape2D" parent="."]
+[node name="Collision" parent="." index="2"]
 position = Vector2(-4, 1)
-shape = SubResource("RectangleShape2D_ta221")
+shape = SubResource("RectangleShape2D_75xht")
 
-[node name="Hitboxes" type="Node" parent="."]
-
-[node name="SFX" type="Node" parent="."]
-
-[node name="Step" type="AudioStreamPlayer" parent="SFX"]
+[node name="Step" parent="SFX" index="0"]
 stream = ExtResource("2_p6fl7")
-bus = &"SFX"
 
-[node name="Roar" type="AudioStreamPlayer" parent="SFX"]
+[node name="Roar" parent="SFX" index="1"]
 stream = ExtResource("3_kfkrj")
-bus = &"SFX"
-
-[node name="Punch" type="AudioStreamPlayer" parent="SFX"]
-stream = ExtResource("6_ysyw7")
-bus = &"SFX"
