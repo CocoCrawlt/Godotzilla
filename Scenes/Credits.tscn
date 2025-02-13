@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://cqlhofm4kl4y"]
 
-[ext_resource type="Script" path="res://Scripts/Credits.gd" id="1_21yi6"]
+[ext_resource type="Script" uid="uid://buxgjlhbnvwcy" path="res://Scripts/Credits.gd" id="1_21yi6"]
 [ext_resource type="AudioStream" uid="uid://bw2ac1eh6npco" path="res://Audio/Soundtrack/Credits.ogg" id="2_knkbt"]
 [ext_resource type="FontFile" uid="uid://dycfyvuoxfwc0" path="res://Sprites/font1.png" id="2_vqk51"]
 

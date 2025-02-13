@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://jnprrhsi16ey" path="res://Scenes/Levels/BaseLevel.tscn" id="1_ohey1"]
 [ext_resource type="PackedScene" uid="uid://bdedrxocj46sr" path="res://Objects/Characters/PlayerCharacter.tscn" id="2_atw37"]
-[ext_resource type="Script" path="res://Scripts/Levels/Bosses/BaseBoss.gd" id="2_xih6l"]
+[ext_resource type="Script" uid="uid://0d2jb6apu4qs" path="res://Scripts/Levels/Bosses/BaseBoss.gd" id="2_xih6l"]
 
 [node name="Boss" instance=ExtResource("1_ohey1")]
 script = ExtResource("2_xih6l")

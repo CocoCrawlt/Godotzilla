@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://du38sf8ro3elu"]
 
-[ext_resource type="Script" path="res://Scripts/Main.gd" id="1_csd2w"]
+[ext_resource type="Script" uid="uid://bhoifgsm365tw" path="res://Scripts/Main.gd" id="1_csd2w"]
 [ext_resource type="AudioStream" uid="uid://bgfupmtntcg8x" path="res://Audio/SFX/Pause.wav" id="3_iol3x"]
 [ext_resource type="AudioStream" uid="uid://dcy2jbwfd2no" path="res://Audio/SFX/CharHurt.wav" id="3_jlebr"]
 [ext_resource type="AudioStream" uid="uid://byy8g0bpfb65s" path="res://Audio/SFX/BlockDestruct.wav" id="4_oop6x"]
@@ -51,8 +51,8 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_lb25u"]
 _data = {
-"FadeIn": SubResource("Animation_xmtka"),
-"RESET": SubResource("Animation_mfy1u")
+&"FadeIn": SubResource("Animation_xmtka"),
+&"RESET": SubResource("Animation_mfy1u")
 }
 
 [node name="Main" type="Node2D"]
@@ -77,7 +77,7 @@ color = Color(0, 0, 0, 1)
 
 [node name="FadePlayer" type="AnimationPlayer" parent="CanvasLayer"]
 libraries = {
-"": SubResource("AnimationLibrary_lb25u")
+&"": SubResource("AnimationLibrary_lb25u")
 }
 
 [node name="GlobalSFX" type="Node" parent="."]

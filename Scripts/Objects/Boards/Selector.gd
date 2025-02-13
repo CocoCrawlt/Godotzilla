@@ -9,13 +9,13 @@ enum MovementStyle {
 @export var movement_style := MovementStyle.OUTSIDE_CELLS
 @export var board_outline: TileMapLayer
 @export var tilemap: TileMapLayer
-@export var message_window: Control
+@export var message_window: MessageWindow
 @export var board: Board
 
-# Speed (in pixels per frame for 60 fps)
+## Speed (in pixels per frame for 60 fps)
 var speed := Vector2()
 var next_speed := Vector2()
-# Current cell position in pixels
+## Current cell position in pixels
 var old_pos: Vector2
 var moved_at_all := false
 var ignore_player_input := false
@@ -46,7 +46,7 @@ func _process(delta: float) -> void:
 		
 #region Movement
 		
-# Request movement in the direction of (dirx, diry) vector
+## Request movement in the direction of (dirx, diry) vector
 func move(dirx: float, diry: float) -> void:
 	dirx = signf(dirx)
 	diry = signf(diry)
@@ -63,7 +63,7 @@ func move(dirx: float, diry: float) -> void:
 	if next_speed.length() > 0:
 		moved_at_all = true
 		
-# When the movement should be stopped
+## When the movement should be stopped
 func stop_conditions() -> void:
 	var next_piece := get_next_cell_piece()
 	
@@ -168,19 +168,19 @@ func get_neighbor_bosses() -> Array[BoardPiece]:
 
 #region Tilemap-related code
 
-# Snap coords to tilemap cells
+## Snap coords to tilemap cells
 func map_to_tilemap(pos: Vector2, tm: TileMapLayer = tilemap) -> Vector2:
 	return tm.map_to_local(tm.local_to_map(pos)) - Vector2(0, 7)
 	
-# Convert local coords into tilemap cell coords
+## Convert local coords into tilemap cell coords
 func get_cell_pos(pos: Vector2) -> Vector2i:
 	return tilemap.local_to_map(pos)
 	
-# Get cell from the position
+## Get cell from the position
 func cell_from_pos(pos: Vector2i) -> Vector2i:
 	return tilemap.get_cell_atlas_coords(pos)
 	
-# Check if a cell exists
+## Check if a cell exists
 func cell_exists(pos: Vector2i) -> bool:
 	return board_outline.get_cell_atlas_coords(pos).x >= 0
 	
@@ -203,7 +203,7 @@ func reset_playing_levels() -> void:
 func get_level_id(tile: Vector2i) -> int:
 	return tile.x + tile.y * 5
 	
-# Get the piece (if exists) from the next cell
+## Get the piece (if exists) from the next cell
 func get_next_cell_piece() -> Sprite2D:
 	for p: Sprite2D in board.get_board_pieces():
 		if p.get_cell_pos() == get_next_cell_pos():

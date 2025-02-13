@@ -1,26 +1,31 @@
 class_name HealthComponent
 extends Node
 
-## Health points
+## Maximum value of health the component should hold
 @export var max_value := 10.0
 @export var enemy := false
+## The amount of time in seconds the component should be invincible after getting damaged
 @export var invincibility_time_seconds := 0.0
 ## How many health points should be taken each frame
 @export var health_speed := 1.0
 
+## The current amount of health
+var target_value := 0.0
+## The amount of health that should be shown on screen
 var value := 0.0:
 	set(v):
 		value = v
 		value_changed.emit(value)
-var target_value := 0.0
 var died := false
 var invincible := false
 
+## The health amount that should be shown on screen has changed
 signal value_changed(new_value: float)
 signal damaged(amount: float, hurt_time: float)
-signal dead
 signal healed(amount: float)
+## Happens when the maximum amount of health changes
 signal resized(new_amount: float)
+signal dead
 
 func _ready() -> void:
 	set_value(max_value)

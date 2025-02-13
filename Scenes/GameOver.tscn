@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://chlit8t7aajq7"]
 
-[ext_resource type="Script" path="res://Scripts/GameOver.gd" id="1_43hv7"]
+[ext_resource type="Script" uid="uid://dbwjxips4idlv" path="res://Scripts/GameOver.gd" id="1_43hv7"]
 [ext_resource type="FontFile" uid="uid://dycfyvuoxfwc0" path="res://Sprites/font1.png" id="1_u30ip"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_1gnhd"]

@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://c3qwhre32yggp" path="res://Sprites/Characters/Godzilla/walk_body.png" id="1_3sn8y"]
 [ext_resource type="Texture2D" uid="uid://c8vjp0lgjim3x" path="res://Sprites/Characters/Godzilla/crouch.png" id="1_7wdfd"]
-[ext_resource type="Script" path="res://Scripts/Objects/Characters/Godzilla/Main.gd" id="1_gfjpc"]
+[ext_resource type="Script" uid="uid://dy7tqloc3iyy3" path="res://Scripts/Objects/Characters/Godzilla/Main.gd" id="1_gfjpc"]
 [ext_resource type="PackedScene" uid="uid://2kanj7crlbl5" path="res://Objects/Characters/BaseSkin.tscn" id="1_u2lhu"]
 [ext_resource type="Texture2D" uid="uid://c7slof73fr1l6" path="res://Sprites/Characters/Godzilla/hurt.png" id="2_0y6ho"]
 [ext_resource type="Texture2D" uid="uid://drtem8jbie2f0" path="res://Sprites/Characters/Godzilla/heat_beaming.png" id="2_pgjrr"]
@@ -12,7 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://b3aqq06ew63k8" path="res://Sprites/Characters/Godzilla/kick2.png" id="3_vxmse"]
 [ext_resource type="Texture2D" uid="uid://bsu6rokyd5rmu" path="res://Sprites/Characters/Godzilla/tail_whip.png" id="4_3ah1i"]
 [ext_resource type="Texture2D" uid="uid://cp7yo85faut6q" path="res://Sprites/Characters/Godzilla/punch2.png" id="4_7jbwm"]
-[ext_resource type="Script" path="res://Scripts/Objects/Attacks/AttackDescription.gd" id="4_myvd7"]
+[ext_resource type="Script" uid="uid://b1bjey1kvrefj" path="res://Scripts/Objects/Attacks/AttackDescription.gd" id="4_myvd7"]
 [ext_resource type="AudioStream" uid="uid://deo2ts4xdwwce" path="res://Audio/SFX/CharPunch.wav" id="15_6hykl"]
 
 [sub_resource type="Resource" id="Resource_knn82"]
@@ -976,17 +976,17 @@ tracks/3/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_bqais"]
 _data = {
-"Crouch": SubResource("Animation_gbymh"),
-"HeatBeam1": SubResource("Animation_1eids"),
-"HeatBeam2": SubResource("Animation_qafyb"),
-"HeatBeam3": SubResource("Animation_r8s0h"),
-"Hurt": SubResource("Animation_l466n"),
-"Kick1": SubResource("Animation_pvo27"),
-"Kick2": SubResource("Animation_lycjq"),
-"Punch1": SubResource("Animation_nvyyh"),
-"Punch2": SubResource("Animation_kl1fp"),
-"RESET": SubResource("Animation_r5asl"),
-"TailWhip": SubResource("Animation_57mnw")
+&"Crouch": SubResource("Animation_gbymh"),
+&"HeatBeam1": SubResource("Animation_1eids"),
+&"HeatBeam2": SubResource("Animation_qafyb"),
+&"HeatBeam3": SubResource("Animation_r8s0h"),
+&"Hurt": SubResource("Animation_l466n"),
+&"Kick1": SubResource("Animation_pvo27"),
+&"Kick2": SubResource("Animation_lycjq"),
+&"Punch1": SubResource("Animation_nvyyh"),
+&"Punch2": SubResource("Animation_kl1fp"),
+&"RESET": SubResource("Animation_r5asl"),
+&"TailWhip": SubResource("Animation_57mnw")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5k7ce"]
@@ -1018,7 +1018,7 @@ animation = &"Idle"
 
 [node name="AnimationPlayer" parent="." index="1"]
 libraries = {
-"": SubResource("AnimationLibrary_bqais")
+&"": SubResource("AnimationLibrary_bqais")
 }
 
 [node name="CrouchCollision" type="CollisionShape2D" parent="." index="3"]

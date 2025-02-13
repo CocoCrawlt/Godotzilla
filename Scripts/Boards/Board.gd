@@ -156,12 +156,14 @@ func _process(_delta: float) -> void:
 	if message_window.visible and Input.is_action_just_pressed("B"):
 		message_window.disappear()
 		
+## The player has requested to deselect the piece and cancel its current move
 func cancel_move() -> void:
 	selected_piece.deselect()
 	selected_piece = null
 	message_window.disappear()
 	selector.set_process(true)
-		
+
+## Change the message window's Y position depending on selector's Y position
 func adjust_message_pos() -> void:
 	if selector.position.y > 120:
 		message_window.position.y = 16
@@ -180,12 +182,12 @@ func build_outline() -> void:
 	for cell in tilemap.get_used_cells():
 		outline.set_cell(cell, 0, Vector2i(0, 0))
 		
-# The player skipped their move, make the bosses do their move
+## The player skipped their move, make the bosses do their move
 func not_going_to_move() -> void:
 	await fade_out_selected(false)
 	returned()
 	
-# The player made their move
+## The player made their move and the levels should start to be played
 func start_playing(boss_piece: BoardPiece = null) -> void:
 	# The levels the player is going to go through
 	Global.playing_levels.assign(selector.playing_levels)
@@ -216,7 +218,7 @@ func start_playing(boss_piece: BoardPiece = null) -> void:
 	# hence the second false argument.
 	Global.change_scene(Global.get_next_level(), false)
 	
-# Fade out after the player made their move
+## Fade out after the player made their move
 func fade_out_selected(music_fade_out := true) -> void:
 	selected_piece.prepare_start()
 	get_tree().paused = true
@@ -231,9 +233,9 @@ func fade_out_selected(music_fade_out := true) -> void:
 	
 	get_tree().paused = false
 	
-# The game returned back to the board after a level was finished.
-# ignore_boss_moves indicates that the game returned to the board
-# after a boss scene where the boss timer ran out
+## The game returned back to the board after a level was finished.
+## ignore_boss_moves indicates that the game returned to the board
+## after a boss scene where the boss timer ran out
 func returned(ignore_boss_moves := false) -> void:
 	await get_tree().create_timer(0.5).timeout
 	
@@ -273,6 +275,7 @@ func returned(ignore_boss_moves := false) -> void:
 	selector.ignore_player_input = false
 	selector.playing_levels.clear()
 	
+## If the cell_pos position on the tilemap points to a scene tile, returns it, otherwise returns null
 func get_current_scene_tile(cell_pos: Vector2i) -> LevelSceneTile:
 	var tilescene: Array[LevelSceneTile] = []
 	var tile_pos := tilemap.map_to_local(cell_pos)
@@ -304,6 +307,8 @@ func get_custom_tile_data(cell_pos: Vector2i, data_name: String) -> Variant:
 func get_tile_level(cell_pos: Vector2i) -> PackedScene:
 	return get_custom_tile_data(cell_pos, "Level")
 	
+## Check if the selector is currently over a transition level tile, a.k.a. a level
+## after which a board piece should be sent to the next planet
 func check_transition_level() -> bool:
 	var check: bool = get_custom_tile_data(selector.get_current_cell(), "TransitionLevel")
 	if check:
@@ -330,7 +335,7 @@ func save_game_data() -> void:
 
 #region Bosses
 		
-# Information about a boss after the player pressed on their board piece
+## Information about a boss after the player pressed on their board piece
 func show_boss_info(piece: BoardPiece) -> void:
 	var text := PlayerCharacter.get_character_name_static(piece.piece_character) + " - "
 	var size := Vector2i(message_window.default_window_size)
@@ -349,7 +354,7 @@ func boss_hp_str(hp: float) -> String:
 		s += ".0"
 	return s
 	
-# Make the boss piece move using pathfinding
+## Make the boss piece move using pathfinding
 func move_boss() -> bool:
 	var boss_piece: BoardPiece = get_boss_pieces().pick_random()
 	
@@ -418,8 +423,7 @@ func get_closest_player(boss_piece: BoardPiece) -> Node2D:
 		)
 	return array[0]
 	
-# Convert navigation path of global positions to
-# path of positions snapped to tilemap cells
+## Convert navigation path of global positions to path of positions snapped to tilemap cells
 func convert_navigation_path(path: PackedVector2Array) -> PackedVector2Array:
 	var result := PackedVector2Array()
 	for point: Vector2 in path:
@@ -444,8 +448,7 @@ func get_board_pieces() -> Array[BoardPiece]:
 			))
 	return board_pieces
 
-# If selector is currently positioned on a board piece
-# then we can check that using this function
+## If selector is currently positioned on a board piece, return the piece
 func get_current_piece() -> BoardPiece:
 	for p: BoardPiece in get_board_pieces():
 		if p.get_cell_pos() == selector.get_cell_pos(selector.old_pos):

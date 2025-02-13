@@ -1,23 +1,26 @@
 [gd_scene load_steps=7 format=3 uid="uid://bvoxqi1x6lk52"]
 
 [ext_resource type="PackedScene" uid="uid://camascwoory5h" path="res://Objects/HealthComponent.tscn" id="1_cy6fi"]
-[ext_resource type="Script" path="res://Scripts/Objects/Enemies/BaseEnemy.gd" id="1_sr5re"]
+[ext_resource type="Script" uid="uid://cggoo3cl4mpvp" path="res://Scripts/Objects/Enemies/BaseEnemy.gd" id="1_sr5re"]
 [ext_resource type="PackedScene" uid="uid://bi7wq6b7la5ki" path="res://Objects/AttackComponent.tscn" id="2_ma02d"]
-[ext_resource type="Script" path="res://Scripts/Objects/Attacks/AttackDescription.gd" id="4_mfmwy"]
+[ext_resource type="Script" uid="uid://b1bjey1kvrefj" path="res://Scripts/Objects/Attacks/AttackDescription.gd" id="4_mfmwy"]
 
 [sub_resource type="Resource" id="Resource_hffvk"]
 script = ExtResource("4_mfmwy")
 name = "Main"
+simple_or_advanced = 0
+other_information = Array[String]([])
 type = 2
 damage_amount = 2.0
 hitbox_name = "CollisionShape2D"
-other_information = Array[String]([])
 hurt_time = -1.0
 start_time_offset = 0.0
 animation_name = ""
 animation_name2 = ""
 time_length = -1.0
+reset_animation_before = true
 reset_animation_after = true
+function_name = ""
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mvstq"]
 size = Vector2(20, 16)

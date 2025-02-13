@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://cpxp6boj611rb"]
 
 [ext_resource type="Texture2D" uid="uid://dbjki3nsg35x8" path="res://Sprites/Levels/explosion.png" id="1_t4gnj"]
-[ext_resource type="Script" path="res://Scripts/Objects/Explosion.gd" id="2_wfcqr"]
+[ext_resource type="Script" uid="uid://dm6xq25yiuhx6" path="res://Scripts/Objects/Explosion.gd" id="2_wfcqr"]
 
 [sub_resource type="Animation" id="Animation_7s04k"]
 length = 0.001
@@ -49,8 +49,8 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_t5kuu"]
 _data = {
-"RESET": SubResource("Animation_7s04k"),
-"animation": SubResource("Animation_pjamu")
+&"RESET": SubResource("Animation_7s04k"),
+&"animation": SubResource("Animation_pjamu")
 }
 
 [node name="Explosion" type="Sprite2D"]

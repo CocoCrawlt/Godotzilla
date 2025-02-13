@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://hos7shkktc1k"]
 
 [ext_resource type="Texture2D" uid="uid://c1n8vhgw5br0w" path="res://Sprites/Objects/capsules.png" id="1_0f167"]
-[ext_resource type="Script" path="res://Scripts/Objects/Capsule.gd" id="2_74wkk"]
+[ext_resource type="Script" uid="uid://pqn0sexvus23" path="res://Scripts/Objects/Capsule.gd" id="2_74wkk"]
 [ext_resource type="AudioStream" uid="uid://btqycedtut0o6" path="res://Audio/SFX/Capsule.wav" id="3_eegh8"]
 
 [sub_resource type="Animation" id="Animation_5m62m"]
@@ -57,9 +57,9 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_cxuko"]
 _data = {
-"RESET": SubResource("Animation_5m62m"),
-"health": SubResource("Animation_c4ftu"),
-"power": SubResource("Animation_um106")
+&"RESET": SubResource("Animation_5m62m"),
+&"health": SubResource("Animation_c4ftu"),
+&"power": SubResource("Animation_um106")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4xqf8"]

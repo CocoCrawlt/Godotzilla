@@ -17,6 +17,7 @@ const GAME_OVER_SCENE := preload("res://Scenes/GameOver.tscn")
 @onready var camera: Camera2D = $Camera
 @onready var player: PlayerCharacter = $Player
 
+## Important gameplay data that should be passed between levels (and from the boards)
 class GameplayData:
 	var current_character := PlayerCharacter.Type.GODZILLA
 	var board_piece: BoardPiece = null

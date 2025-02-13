@@ -109,6 +109,7 @@ func update_frame() -> void:
 	# Face the left direction if it's a boss
 	scale.x = 1 if piece_type == 0 else -1
 
+## Get current tilemap cell coords of the piece
 func get_cell_pos() -> Vector2i:
 	if Engine.is_editor_hint():
 		return Vector2i.ZERO
@@ -138,7 +139,7 @@ func show_cell_below() -> void:
 	tilemap.set_cell(get_cell_pos(), 1, tile_below)
 	tile_below = Vector2i(-1, -1)
 
-# The player/boss has selected this board piece
+## The player/boss has selected this board piece
 func select() -> void:
 	selected = true
 	
@@ -156,6 +157,7 @@ func select() -> void:
 	
 		Global.play_global_sfx("MenuBip")
 	
+## The player/boss has deselected this board piece
 func deselect() -> void:
 	selected = false
 	
@@ -169,6 +171,7 @@ func deselect() -> void:
 		position = init_pos
 		hide_cell_below()
 	
+## Prepare the piece for starting the level. Hides the cell below, among other things 
 func prepare_start() -> void:
 	init_pos = position
 	selected = false
@@ -178,6 +181,7 @@ func prepare_start() -> void:
 	
 	hide_cell_below()
 	
+## Remove the piece from the board
 func remove() -> void:
 	if is_instance_valid(Global.board) and Global.board.selected_piece == self:
 		Global.board.selected_piece = null
@@ -185,6 +189,7 @@ func remove() -> void:
 	show_cell_below()
 	queue_free()
 	
+## Save its data to the board
 func save_data() -> void:
 	if not is_instance_valid(Global.board):
 		return

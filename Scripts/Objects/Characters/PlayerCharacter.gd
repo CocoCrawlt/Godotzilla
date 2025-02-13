@@ -26,18 +26,25 @@ const SKINS: Array[String] = [
 
 @export var character := PlayerCharacter.Type.GODZILLA
 
-@export var is_player := true
-@export var enable_intro := true
-@export var enable_attacks := true
-## If true, the player object will face the movement direction
-@export var allow_direction_changing := false
-
 @export_enum("Right:1", "Left:-1")
 var direction: int = 1:
 	set(value):
-		direction = value
-		if is_instance_valid(skin) and value != 0:
-			skin.scale.x = value
+		if value == 0:
+			return
+		direction = signi(value)
+		if is_instance_valid(skin):
+			skin.scale.x = direction
+
+@export_category("Features")
+## If not checked, then the PlayerCharacter is treated as a boss
+## and not a character for the current player
+@export var is_player := true
+## Enable intro with steps and roaring, after which the player gets control and the level starts
+@export var enable_intro := true
+## If the attacks are not desired for the current level, uncheck this property
+@export var enable_attacks := true
+## If checked, the player can change the character's facing direction while moving left or right
+@export var allow_direction_changing := false
 
 @onready var attack: AttackComponent = $AttackComponent
 @onready var state: StateMachine = $StateMachine
@@ -170,8 +177,8 @@ func process_input() -> void:
 		for i in range(Inputs.B, Inputs.size()):
 			inputs[i] = Input.is_action_pressed(INPUT_ACTIONS[i])
 			inputs_pressed[i] = Input.is_action_just_pressed(INPUT_ACTIONS[i])
-			
-# Useful for boss attacks in AI code
+
+## Useful for boss attacks in AI code
 func simulate_input_press(key: Inputs) -> void:
 	inputs_pressed[key] = true
 	await get_tree().process_frame
@@ -179,7 +186,7 @@ func simulate_input_press(key: Inputs) -> void:
 	
 #endregion
 	
-# Set the current xp level
+## Set the current xp level
 func set_level(value: int, sfx := false) -> void:
 	if not is_player or level == value:
 		return
@@ -224,6 +231,7 @@ func get_sfx(sfx_name: String) -> AudioStreamPlayer:
 		return skin.get_node(path)
 	return get_node(path)
 	
+## Play a sound effect from the list of PlayerCharacter scene's SFXs or character-specific SFXs via skins
 func play_sfx(sfx_name: String) -> AudioStreamPlayer:
 	var sfx := get_sfx(sfx_name)
 	sfx.play()
@@ -235,6 +243,7 @@ func get_character_name() -> String:
 func is_flying() -> bool:
 	return move_state == State.FLY
 	
+## Set the collision shape
 func set_collision(shape: CollisionShape2D) -> void:
 	get_children().map(func(c: Node) -> void:
 		if c is CollisionShape2D:
@@ -261,7 +270,7 @@ func _on_health_dead() -> void:
 	state.current = State.DEAD
 	power.set_empty()
 	
-# Load the character state from data from a board piece
+## Load the character state from data from a board piece
 func load_state(data: BoardPiece.CharacterData = null) -> void:
 	var bar_value := 0
 	if data == null:
@@ -280,7 +289,7 @@ func load_state(data: BoardPiece.CharacterData = null) -> void:
 	power.max_value = bar_value
 	power.value = bar_value
 	
-# Save the character state into a dictionary from a board piece
+## Save the character state into a dictionary from a board piece
 func save_state(data: BoardPiece.CharacterData) -> void:
 	data.hp = health.value
 	data.bars = int(power.max_value / 8)

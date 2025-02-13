@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://gf7elbg3k3nj"]
 
 [ext_resource type="PackedScene" uid="uid://bvoxqi1x6lk52" path="res://Objects/Levels/Enemies/BaseEnemy.tscn" id="1_rc47s"]
-[ext_resource type="Script" path="res://Scripts/Objects/Enemies/Jet.gd" id="2_oq0b1"]
+[ext_resource type="Script" uid="uid://om5o0esohhur" path="res://Scripts/Objects/Enemies/Jet.gd" id="2_oq0b1"]
 [ext_resource type="Texture2D" uid="uid://dh1lle66u4pmf" path="res://Sprites/Objects/Enemies/Jet.png" id="2_v43kf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e8sqc"]
@@ -94,10 +94,10 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_gx3mi"]
 _data = {
-"RESET": SubResource("Animation_1b12d"),
-"flying_left": SubResource("Animation_4gqaq"),
-"flying_right": SubResource("Animation_nydiu"),
-"idle": SubResource("Animation_on3rk")
+&"RESET": SubResource("Animation_1b12d"),
+&"flying_left": SubResource("Animation_4gqaq"),
+&"flying_right": SubResource("Animation_nydiu"),
+&"idle": SubResource("Animation_on3rk")
 }
 
 [node name="Jet" instance=ExtResource("1_rc47s")]

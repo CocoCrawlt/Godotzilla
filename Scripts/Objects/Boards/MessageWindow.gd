@@ -27,6 +27,7 @@ enum Response {
 var default_window_size := Vector2i(window_size)
 var state := State.HIDDEN
 
+## The player made a choice after being presented with a Yes/No choice
 signal choice_made(choice: Response)
 
 func _ready() -> void:
@@ -94,6 +95,7 @@ func appear(
 	text.visible = true
 	state = State.SHOWN
 	
+## Make the message window appear and ask the player to make a Yes/No choice
 func make_choice(message: String, enable_sound := true) -> Response:
 	if state == State.APPEARING or state == State.DISAPPEARING:
 		return Response.UNKNOWN
@@ -107,6 +109,7 @@ func make_choice(message: String, enable_sound := true) -> Response:
 
 	return await choice_made
 	
+## Disappear slowly
 func disappear() -> void:
 	if state != State.SHOWN:
 		return
@@ -120,6 +123,7 @@ func disappear() -> void:
 	tween.finished.connect(make_hide)
 	await tween.finished
 		
+## Disappear immediately
 func make_hide() -> void:
 	visible = false
 	text.visible = false
@@ -127,6 +131,7 @@ func make_hide() -> void:
 	state = State.HIDDEN
 	size = Vector2(0, window_size.y)
 		
+## Get the currently shown text
 func get_text() -> String:
 	return $Text.text
 

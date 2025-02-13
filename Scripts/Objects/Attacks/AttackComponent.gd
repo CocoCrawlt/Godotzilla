@@ -1,14 +1,17 @@
 class_name AttackComponent
 extends Node2D
 
+## Simple attacks will use this node to play its animations
 @export var attack_animation_player: AnimationPlayer
 ## A node that has attack hitboxes as its children
 @export var hitboxes: Node
 @export var enemy := false
+## The name of the attack that should play when the component is ready
 @export var initial_attack: String
 @export var attacks: Array[AttackDescription]
 @export var objects_to_ignore: Array[Node2D]
 @export_group("Advanced Attacks")
+## If an attack is of advanced type, it will call its specified function on this node
 @export var attack_function_node: Node
 
 @onready var area_2d: Area2D = $Area2D
@@ -19,11 +22,15 @@ var variation := false
 # We don't want to attack a body multiple times in the same attack
 var attacked_bodies: Array[Node2D] = []
 
+## Happens when the attack component attacks a body
 signal body_attacked(body: Node2D, attack: AttackDescription)
-# DEPRECATED: Signal for compatibility reasons
-signal attacked(body: Node2D, amount: float)
+## Happens before an attack starts
 signal attack_started(attack: AttackDescription)
+## Happens after an attack finishes
 signal attack_finished(attack: AttackDescription)
+
+## DEPRECATED: Signal for compatibility reasons
+signal attacked(body: Node2D, amount: float)
 
 func _ready() -> void:
 	if initial_attack != "":
@@ -99,7 +106,7 @@ func start_simple_attack() -> void:
 			await get_tree().process_frame
 		attack_bodies()
 		
-	if current_attack.type != AttackDescription.Type.LASTS_FOREVER:
+	if current_attack and current_attack.type != AttackDescription.Type.LASTS_FOREVER:
 		if current_attack.time_length < 0.0:
 			await attack_animation_player.animation_finished
 		else:
@@ -161,7 +168,7 @@ func set_hitbox(size: Vector2, offset: Vector2) -> void:
 	hitbox.shape.size = size
 	set_hitbox_node(hitbox, offset)
 	
-# DEPRECATED: Compatibility method
+## DEPRECATED: Compatibility method
 func set_collision(size: Vector2, offset: Vector2) -> void:
 	set_hitbox(size, offset)
 	
