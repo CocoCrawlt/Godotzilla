@@ -1,5 +1,4 @@
-class_name PowerComponent
-extends Node
+class_name PowerComponent extends Node
 
 @export var value := 10.0
 @export var max_value := 10.0

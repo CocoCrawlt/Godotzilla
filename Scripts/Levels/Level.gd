@@ -1,5 +1,4 @@
-class_name Level
-extends Node2D
+class_name Level extends Node2D
 
 enum LevelBoundaryType {
 	## The player will act like there's a big wall preventing them from going further
@@ -70,7 +69,7 @@ func _process(_delta: float) -> void:
 				next_level()
 
 func save_player_state() -> void:
-	var board_piece: Node2D = data.board_piece
+	var board_piece: BoardPiece = data.board_piece
 	if board_piece:
 		player.save_state(board_piece.character_data)
 		board_piece.level = board_piece.character_data.level

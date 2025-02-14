@@ -1,5 +1,4 @@
-class_name AttackComponent
-extends Node2D
+class_name AttackComponent extends Node2D
 
 ## Simple attacks will use this node to play its animations
 @export var attack_animation_player: AnimationPlayer
@@ -67,6 +66,7 @@ func start_attack(attack_name: String) -> void:
 		if is_instance_valid(current_attack):
 			stop_attack()
 		
+# TODO: check for cancellation after each await?
 func start_simple_attack() -> void:
 	sfx_player.stream = current_attack.sfx
 	sfx_player.play()

@@ -1,5 +1,4 @@
-class_name LevelVariation
-extends Resource
+class_name LevelVariation extends Resource
 
 @export var levels: Array[PackedScene]
 

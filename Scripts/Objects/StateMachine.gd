@@ -1,5 +1,4 @@
-class_name StateMachine
-extends Node
+class_name StateMachine extends Node
 
 @export var initial_state: Node = null
 @onready var states_list: Array[State] = []

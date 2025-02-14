@@ -19,9 +19,9 @@ var selector_position := 0
 var alphabet: PackedStringArray
 var password: PackedStringArray = []
 
-# Dictionary of all passwords
-# Passwords should be lowercase and stripped from spaces on the right
-var passwords := {
+## Dictionary of all passwords.
+## Passwords should be lowercase and stripped from spaces on the right
+var passwords: Dictionary[String, Callable] = {
 	"test": pw_test,
 }
 
@@ -175,7 +175,7 @@ func get_password_text() -> String:
 # Password actions below #
 ##########################
 
-# Just a test password
+## Just a test password
 func pw_test() -> void:
 	get_tree().paused = true
 	

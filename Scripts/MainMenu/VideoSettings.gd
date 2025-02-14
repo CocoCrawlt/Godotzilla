@@ -1,5 +1,4 @@
-class_name VideoSettings
-extends "res://Scripts/MainMenu/Menu.gd"
+class_name VideoSettings extends "res://Scripts/MainMenu/Menu.gd"
 
 # Section in the save file
 const SECTION := "Video"

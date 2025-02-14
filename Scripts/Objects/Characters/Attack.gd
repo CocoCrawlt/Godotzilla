@@ -1,7 +1,6 @@
 extends "res://Scripts/Objects/Characters/PlayerState.gd"
 
-var move_state: Node
-var variation := 0
+var move_state: State
 var current_attack: AttackDescription
 var save_state: PlayerCharacter.State
 

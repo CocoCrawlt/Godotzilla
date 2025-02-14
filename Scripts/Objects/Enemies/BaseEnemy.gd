@@ -1,5 +1,4 @@
-class_name Enemy
-extends StaticBody2D
+class_name Enemy extends StaticBody2D
 
 @onready var health_component := $HealthComponent
 @onready var attack_component := $AttackComponent

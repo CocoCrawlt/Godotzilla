@@ -1,3 +1,3 @@
 extends State
 
-@onready var player := parent as PlayerCharacter
+@onready var player: PlayerCharacter = parent

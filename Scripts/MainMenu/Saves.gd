@@ -27,7 +27,7 @@ func _ready() -> void:
 	
 	var save_id := 0
 	for save_slot in save_slots:
-		SaveManager.set_save_slot(save_id)
+		SaveManager.save_slot_id = save_id
 		var save_data := SaveManager.load_save_data()
 		var board_description := get_board_description(save_data)
 		if board_description == null:
@@ -57,7 +57,7 @@ func menu_select(id: int) -> void:
 			main_menu.set_menu(%MenuMain)
 			delete_text.hide()
 		_:
-			SaveManager.set_save_slot(id)
+			SaveManager.save_slot_id = id
 			var save_data := SaveManager.load_save_data()
 			var board_description := get_board_description(save_data)
 			

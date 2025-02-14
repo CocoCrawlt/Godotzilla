@@ -1,5 +1,4 @@
-class_name HealthComponent
-extends Node
+class_name HealthComponent extends Node
 
 ## Maximum value of health the component should hold
 @export var max_value := 10.0
