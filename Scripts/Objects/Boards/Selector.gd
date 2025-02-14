@@ -1,5 +1,4 @@
-class_name BoardSelector
-extends Sprite2D
+class_name BoardSelector extends Sprite2D
 
 enum MovementStyle {
 	OUTSIDE_CELLS,

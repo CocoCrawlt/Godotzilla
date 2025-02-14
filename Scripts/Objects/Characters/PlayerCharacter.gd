@@ -1,5 +1,4 @@
-class_name PlayerCharacter
-extends GameCharacter
+class_name PlayerCharacter extends GameCharacter
 
 #region General constants, variables and signals
 

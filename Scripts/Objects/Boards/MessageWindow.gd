@@ -1,5 +1,4 @@
-class_name MessageWindow
-extends NinePatchRect
+class_name MessageWindow extends NinePatchRect
 
 enum State {
 	HIDDEN,
@@ -78,7 +77,7 @@ func appear(
 		
 	self.text.text = message
 	self.text.visible = false
-	self.text.size.x = window_size.x - 8
+	self.text.size.x = window_size.x
 	self.text.size.y = window_size.y - 16
 	
 	visible = true

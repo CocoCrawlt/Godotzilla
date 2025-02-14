@@ -1,5 +1,4 @@
-class_name Board
-extends Node2D
+class_name Board extends Node2D
 
 #region Variables
 
@@ -28,7 +27,7 @@ extends Node2D
 @onready var board: Node2D = $Board
 
 var selected_piece: BoardPiece = null
-var board_data := {
+var board_data: Dictionary[String, Variant] = {
 	"players": {}, # [String (board piece name)] -> Dictionary ("xp", "level")
 	"player_characters": [],
 }
@@ -110,7 +109,7 @@ func _process(_delta: float) -> void:
 			elif piece and not piece.is_player():
 				show_boss_info(piece)
 			else:
-				message_window.appear("There is no monster here.")
+				message_window.appear("There is\nno monster here.")
 				
 			adjust_message_pos()
 			
@@ -148,7 +147,7 @@ func _process(_delta: float) -> void:
 			# (to be accurate to the original game)
 			message_window.appear("Then press button A.")
 		elif selected_piece:
-			message_window.appear("If\nfinished movig, press button A.")
+			message_window.appear("If\nfinished moving, press button A.")
 		else:
 			message_window.appear("Select\na monster to move.")
 		adjust_message_pos()
@@ -349,10 +348,7 @@ func show_boss_info(piece: BoardPiece) -> void:
 	message_window.appear(text, true, size)
 		
 func boss_hp_str(hp: float) -> String:
-	var s := str(snappedf(hp, 0.1))
-	if fmod(hp, 1) < 0.1:
-		s += ".0"
-	return s
+	return str(snappedf(hp, 0.1))
 	
 ## Make the boss piece move using pathfinding
 func move_boss() -> bool:

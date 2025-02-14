@@ -1,5 +1,4 @@
-class_name AttackDescription
-extends Resource
+class_name AttackDescription extends Resource
 
 enum Type {
 	ONE_TIME,

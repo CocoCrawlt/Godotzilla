@@ -1,16 +1,19 @@
+## A board piece is the object that represents a game character on a planet board
 @tool
-class_name BoardPiece
-extends Sprite2D
+class_name BoardPiece extends Sprite2D
 
-const PIECE_STEPS := [
-	2, # Godzilla
-	4, # Mothra
-]
-const FRAME_COUNT := 3  # White piece and 2 colored walking sprites
-const FRAME_SPEED := [
-	0.13, # Godzilla
-	0.2, # Mothra
-]
+const PIECE_INFO: Dictionary[PlayerCharacter.Type, Dictionary] = {
+	PlayerCharacter.Type.GODZILLA: {
+		steps = 2,
+		frame_speed = 0.13,
+	},
+	PlayerCharacter.Type.MOTHRA: {
+		steps = 4,
+		frame_speed = 0.2,
+	},
+}
+
+const FRAME_COUNT := 3 # White piece and 2 colored walking sprites
 
 @export var piece_character := PlayerCharacter.Type.GODZILLA:
 	set(value):
@@ -22,7 +25,9 @@ const FRAME_SPEED := [
 		piece_type = value
 		update_frame()
 		queue_redraw()
+## When the boss piece meets with a player piece, this scene should start
 @export var boss_scene: PackedScene = null
+## XP level of the piece.
 ## Only works if it's a boss, otherwise loaded from the current save.
 ## If there's no current save, then it's 1.
 @export var level := 1
@@ -81,7 +86,7 @@ func _ready() -> void:
 		character_data.xp = players_data[name]["xp"]
 		level = character_data.level
 		
-	steps = PIECE_STEPS[piece_character]
+	steps = PIECE_INFO[piece_character].steps
 	character_data.bars = PlayerCharacter.calculate_bar_count(piece_character, level)
 	character_data.hp = character_data.bars * 8
 
@@ -92,7 +97,7 @@ func _process(delta: float) -> void:
 		if walk_anim == 0 and not selector.is_stopped() \
 			or walk_anim == 1:
 				# Switch frame every 0.2 of a second
-				walk_frame += delta / FRAME_SPEED[piece_character]
+				walk_frame += delta / PIECE_INFO[piece_character].frame_speed
 				if walk_frame >= 2:
 					walk_frame -= 2
 				piece_frame = floori(1 + walk_frame)

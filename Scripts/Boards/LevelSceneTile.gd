@@ -1,5 +1,4 @@
-class_name LevelSceneTile
-extends Sprite2D
+class_name LevelSceneTile extends Sprite2D
 
 @export var level: PackedScene
 @export var level_variation: LevelVariation
