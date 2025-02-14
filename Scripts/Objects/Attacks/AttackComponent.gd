@@ -60,11 +60,11 @@ func start_attack(attack_name: String) -> void:
 		await start_simple_attack()
 		if (is_instance_valid(current_attack)
 			and current_attack.type != AttackDescription.Type.LASTS_FOREVER):
-				stop_attack()
+				_stop_attack()
 	else:
 		await attack_function_node.call(current_attack.function_name)
 		if is_instance_valid(current_attack):
-			stop_attack()
+			_stop_attack()
 		
 # TODO: check for cancellation after each await?
 func start_simple_attack() -> void:
@@ -112,9 +112,9 @@ func start_simple_attack() -> void:
 		else:
 			await get_tree().create_timer(current_attack.time_length, false).timeout
 		
-func stop_attack() -> void:
-	if current_attack == null:
-		return
+## Please don't call this method yourself as there may be bugs
+## because of the code being asynchronous
+func _stop_attack() -> void:
 	var save_attack := current_attack
 	current_attack = null
 	attack_finished.emit(save_attack)
