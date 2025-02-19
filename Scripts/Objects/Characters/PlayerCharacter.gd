@@ -18,9 +18,15 @@ enum State {
 	ATTACK,
 }
 
-const SKINS: Array[String] = [
-	"res://Objects/Characters/Godzilla.tscn",
-	"res://Objects/Characters/Mothra.tscn",
+const SKINS: Array[Array] = [
+	[
+		"res://Objects/Characters/Godzilla/Godzilla.tscn",
+		"res://Objects/Characters/Godzilla/GodzillaInfo.tres",
+	],
+	[
+		"res://Objects/Characters/Mothra/Mothra.tscn",
+		"res://Objects/Characters/Mothra/MothraInfo.tres",
+	],
 ]
 
 @export var character := PlayerCharacter.Type.GODZILLA
@@ -88,7 +94,7 @@ func _ready() -> void:
 	await Global.get_current_scene().ready
 		
 	# Skin creation and character-specific setup (inside of the skin's _init and _ready)
-	change_skin(load(SKINS[character]).instantiate())
+	change_skin(load(SKINS[character][0]).instantiate())
 	load_state()
 
 	# Setup for all characters
@@ -237,7 +243,7 @@ func play_sfx(sfx_name: String) -> AudioStreamPlayer:
 	return sfx
 	
 func get_character_name() -> String:
-	return skin.character_name
+	return skin.character_info.character_name
 	
 func is_flying() -> bool:
 	return move_state == State.FLY
@@ -300,16 +306,14 @@ func _on_attack_component_attacked(attacked_body: Node2D, amount: float) -> void
 		add_xp(5)
 		Global.add_score(int(20 * amount))
 		
-static func _get_temporary_skin(char_id: PlayerCharacter.Type) -> PlayerSkin:
-	var skin: PlayerSkin = load(SKINS[char_id]).instantiate()
-	skin.queue_free()
-	return skin
-
+static func get_character_info(char_id: PlayerCharacter.Type) -> CharacterInfo:
+	return load(SKINS[char_id][1])
+		
 static func calculate_bar_count(char_id: PlayerCharacter.Type, char_level: int) -> int:
-	return _get_temporary_skin(char_id).bar_count + char_level - 1
+	return get_character_info(char_id).bar_count + char_level - 1
 	
 static func calculate_xp_amount(char_level: int) -> int:
 	return 100 + 50 * (char_level - 1)
 
 static func get_character_name_static(char_id: PlayerCharacter.Type) -> String:
-	return _get_temporary_skin(char_id).character_name
+	return get_character_info(char_id).character_name

@@ -4,6 +4,8 @@ const LEFT_POS := Vector2i(3, 3)
 const RIGHT_POS := Vector2i(5, 3)
 const END_POS := Vector2i(8, 3)
 
+@export var music: AudioStream
+
 @onready var input_selector: Sprite2D = $PasswordInput/Selector
 @onready var password_node: Label = $PasswordBox/Password
 @onready var password_selector: Sprite2D = $PasswordBox/Selector
@@ -30,7 +32,7 @@ func _ready() -> void:
 	prepare()
 	update_password_text()
 	
-	Global.play_music(preload("res://Audio/Soundtrack/PassWordGame.ogg"))
+	Global.play_music(music)
 	Global.fade_in()
 	
 func _process(_delta: float) -> void:

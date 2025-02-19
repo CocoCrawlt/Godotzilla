@@ -2,6 +2,9 @@ extends Node2D
 
 const TEXT_SPEED := 1 * 60
 
+@export var music: AudioStream
+## The file that contains the game intro scrolling text
+@export_file("*.txt") var text_file: String
 @export var next_scene: PackedScene
 
 @onready var story_text := $Bars/StoryText
@@ -20,12 +23,12 @@ func _ready() -> void:
 		bar.size.x = Global.get_default_resolution().x
 	setup_widescreen_bars()
 	
-	story_text.text = FileAccess.open("res://Other/GameIntroText.txt", FileAccess.READ) \
+	story_text.text = FileAccess.open(text_file, FileAccess.READ) \
 		.get_as_text().replace('\n', '').replace('\r', '')
 	images.visible = false
 	image_count = images.get_child_count()
 	
-	Global.play_music(preload("res://Audio/Soundtrack/Mars.ogg"))
+	Global.play_music(music)
 	Global.fade_in()
 	await get_tree().create_timer(1, false).timeout
 	started = true

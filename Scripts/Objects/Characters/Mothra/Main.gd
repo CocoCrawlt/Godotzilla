@@ -19,7 +19,7 @@ func fly_process() -> void:
 			player.attack.start_attack("WingAttack")
 
 #region Attacks
-const MothraParticle := preload("res://Objects/Characters/MothraParticle.tscn")
+const MothraParticle := preload("res://Objects/Characters/Mothra/MothraParticle.tscn")
 
 # These functions are referenced in the "Attacks" property of the skin object
 

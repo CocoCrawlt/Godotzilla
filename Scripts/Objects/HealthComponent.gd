@@ -25,6 +25,7 @@ signal healed(amount: float)
 ## Happens when the maximum amount of health changes
 signal resized(new_amount: float)
 signal dead
+signal invincibility_ended
 
 func _ready() -> void:
 	set_value(max_value)
@@ -35,17 +36,18 @@ func _process(delta: float) -> void:
 		died = true
 		dead.emit()
 
-func damage(amount: float, hurt_time: float = -1) -> void:
-	if amount <= 0 or invincible or died \
+func damage(attack: AttackDescription) -> void:
+	if attack.damage_amount <= 0 or invincible or died \
 		or (get_parent().has_method("is_hurtable") and not get_parent().is_hurtable()):
 			return
 	
-	target_value = clampf(target_value - amount, 0.0, max_value)
-	damaged.emit(amount, hurt_time)
+	target_value = clampf(target_value - attack.damage_amount, 0.0, max_value)
+	damaged.emit(attack)
 	if invincibility_time_seconds > 0.0:
 		invincible = true
 		await get_tree().create_timer(invincibility_time_seconds, false).timeout
 		invincible = false
+		invincibility_ended.emit()
 		
 func heal(amount: float) -> void:
 	if amount <= 0 or target_value >= max_value or died:

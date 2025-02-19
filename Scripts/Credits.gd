@@ -1,5 +1,6 @@
 extends Node2D
 
+@export_file("*.txt") var credits_file: String
 @export var music: AudioStream
 @onready var text_node: RichTextLabel = $CenterContainer/TextNode
 @onready var licensing: Label = $Licensing
@@ -10,7 +11,7 @@ func _ready() -> void:
 	RenderingServer.set_default_clear_color(Color.BLACK)
 	$CenterContainer.size = Vector2(Global.get_default_resolution())
 	
-	texts.assign(Array(FileAccess.open("res://Other/Credits.txt", FileAccess.READ) \
+	texts.assign(Array(FileAccess.open(credits_file, FileAccess.READ) \
 		.get_as_text().split("==")).map(func(i: String) -> String: return i.strip_edges()))
 		
 	licensing.hide()

@@ -1,10 +1,11 @@
 extends Node2D
 
+@export var music: AudioStream
 var finished := false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	Global.play_music(load("res://Audio/Soundtrack/GameOver.ogg"))
+	Global.play_music(music)
 	Global.fade_in()
 	
 	Global.music.finished.connect(finish)

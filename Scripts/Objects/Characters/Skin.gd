@@ -1,16 +1,15 @@
 class_name PlayerSkin extends Node2D
 
-@export var character_name := ""
+@export var character_info: CharacterInfo
 
-@export_group("Character-specific stats")
-@export var bar_count := 6
+@export_group("Gameplay-specific stats")
 @export var move_state: PlayerCharacter.State
 ## Character move speed in pixels per frame (in case of 60 fps)
 @export var move_speed := 1.0
 @export var level_intro_x_start := -35
 @export var level_intro_y_offset := 0
 
-@export_group("Character-specific stats/For walking characters")
+@export_group("Gameplay-specific stats/For walking characters")
 @export var walk_frame_speed := 9.0
 @export var jump_speed := -2 * 60
 

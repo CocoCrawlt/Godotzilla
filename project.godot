@@ -46,6 +46,15 @@ project/assembly_name="Godotzilla"
 
 naming/scene_name_casing=1
 
+[file_customization]
+
+folder_colors={
+"res://Objects/": "orange",
+"res://Scenes/": "purple",
+"res://Scripts/": "blue",
+"res://Sprites/": "yellow"
+}
+
 [input]
 
 Up={

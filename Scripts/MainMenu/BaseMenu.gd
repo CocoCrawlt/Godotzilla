@@ -1,6 +1,6 @@
 class_name BaseMenu extends Node2D
 
-@export var music: AudioStream = null
+@export var music: AudioStream
 @onready var selector: ColorRect = $Selector
 var selector_option := 0
 var current_menu: Node2D

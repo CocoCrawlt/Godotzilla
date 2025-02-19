@@ -1,15 +1,16 @@
-[gd_scene load_steps=25 format=3 uid="uid://bxqvrtbf0bm8p"]
+[gd_scene load_steps=26 format=3 uid="uid://bxqvrtbf0bm8p"]
 
-[ext_resource type="Texture2D" uid="uid://nhpib3frkqrg" path="res://Sprites/Characters/Mothra/hurt.png" id="1_64xd3"]
-[ext_resource type="Texture2D" uid="uid://dh0gtj20jut25" path="res://Sprites/Characters/Mothra/idle.png" id="1_f6h4m"]
-[ext_resource type="Script" uid="uid://dykjfxayd8shd" path="res://Scripts/Objects/Characters/Mothra/Main.gd" id="1_p8tms"]
-[ext_resource type="PackedScene" uid="uid://2kanj7crlbl5" path="res://Objects/Characters/BaseSkin.tscn" id="1_q4ht6"]
-[ext_resource type="AudioStream" uid="uid://d3q5gj1fhphte" path="res://Audio/SFX/MothraStep.wav" id="2_p6fl7"]
-[ext_resource type="AudioStream" uid="uid://ccjlv2riqxvf3" path="res://Audio/SFX/MothraRoar.wav" id="3_kfkrj"]
-[ext_resource type="Script" uid="uid://b1bjey1kvrefj" path="res://Scripts/Objects/Attacks/AttackDescription.gd" id="4_piolj"]
+[ext_resource type="PackedScene" uid="uid://2kanj7crlbl5" path="res://Objects/Characters/BaseSkin.tscn" id="1_pe2a4"]
+[ext_resource type="Script" uid="uid://dykjfxayd8shd" path="res://Scripts/Objects/Characters/Mothra/Main.gd" id="2_en534"]
+[ext_resource type="Resource" uid="uid://eaudwwedeccd" path="res://Objects/Characters/Mothra/MothraInfo.tres" id="3_cwrxe"]
+[ext_resource type="Script" uid="uid://b1bjey1kvrefj" path="res://Scripts/Objects/Attacks/AttackDescription.gd" id="4_qw0ix"]
+[ext_resource type="Texture2D" uid="uid://nhpib3frkqrg" path="res://Sprites/Characters/Mothra/hurt.png" id="5_b4vwa"]
+[ext_resource type="Texture2D" uid="uid://dh0gtj20jut25" path="res://Sprites/Characters/Mothra/idle.png" id="6_jnfkx"]
+[ext_resource type="AudioStream" uid="uid://d3q5gj1fhphte" path="res://Audio/SFX/MothraStep.wav" id="7_hse6l"]
+[ext_resource type="AudioStream" uid="uid://ccjlv2riqxvf3" path="res://Audio/SFX/MothraRoar.wav" id="8_ngo0w"]
 
 [sub_resource type="Resource" id="Resource_l3d0x"]
-script = ExtResource("4_piolj")
+script = ExtResource("4_qw0ix")
 name = "EyeBeam"
 simple_or_advanced = 1
 other_information = Array[String]([])
@@ -26,7 +27,7 @@ reset_animation_after = true
 function_name = "attack_eye_beam"
 
 [sub_resource type="Resource" id="Resource_tkeyd"]
-script = ExtResource("4_piolj")
+script = ExtResource("4_qw0ix")
 name = "WingAttack"
 simple_or_advanced = 1
 other_information = Array[String]([])
@@ -43,39 +44,39 @@ reset_animation_after = true
 function_name = "attack_wing_attack"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_w0xxw"]
-atlas = ExtResource("1_64xd3")
+atlas = ExtResource("5_b4vwa")
 region = Rect2(0, 0, 54, 76)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_llcnn"]
-atlas = ExtResource("1_64xd3")
+atlas = ExtResource("5_b4vwa")
 region = Rect2(54, 0, 54, 76)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fpgvc"]
-atlas = ExtResource("1_64xd3")
+atlas = ExtResource("5_b4vwa")
 region = Rect2(108, 0, 54, 76)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ktwgh"]
-atlas = ExtResource("1_64xd3")
+atlas = ExtResource("5_b4vwa")
 region = Rect2(162, 0, 54, 76)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pj7eg"]
-atlas = ExtResource("1_64xd3")
+atlas = ExtResource("5_b4vwa")
 region = Rect2(216, 0, 54, 76)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_t68ms"]
-atlas = ExtResource("1_64xd3")
+atlas = ExtResource("5_b4vwa")
 region = Rect2(270, 0, 54, 76)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_iqicc"]
-atlas = ExtResource("1_f6h4m")
+atlas = ExtResource("6_jnfkx")
 region = Rect2(0, 0, 54, 76)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rt780"]
-atlas = ExtResource("1_f6h4m")
+atlas = ExtResource("6_jnfkx")
 region = Rect2(54, 0, 54, 76)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_k0g7u"]
-atlas = ExtResource("1_f6h4m")
+atlas = ExtResource("6_jnfkx")
 region = Rect2(108, 0, 54, 76)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_amh6r"]
@@ -213,14 +214,16 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_75xht"]
 size = Vector2(36, 14)
 
-[node name="Character" instance=ExtResource("1_q4ht6")]
-script = ExtResource("1_p8tms")
-character_name = "Mothra"
-bar_count = 8
+[node name="Character" instance=ExtResource("1_pe2a4")]
+script = ExtResource("2_en534")
+character_info = ExtResource("3_cwrxe")
 move_state = 1
 move_speed = 2.0
+level_intro_x_start = null
 level_intro_y_offset = -40
-attacks = Array[ExtResource("4_piolj")]([SubResource("Resource_l3d0x"), SubResource("Resource_tkeyd")])
+walk_frame_speed = null
+jump_speed = null
+attacks = Array[ExtResource("4_qw0ix")]([SubResource("Resource_l3d0x"), SubResource("Resource_tkeyd")])
 
 [node name="Body" parent="." index="0"]
 position = Vector2(-12, -28)
@@ -237,7 +240,7 @@ position = Vector2(-4, 1)
 shape = SubResource("RectangleShape2D_75xht")
 
 [node name="Step" parent="SFX" index="0"]
-stream = ExtResource("2_p6fl7")
+stream = ExtResource("7_hse6l")
 
 [node name="Roar" parent="SFX" index="1"]
-stream = ExtResource("3_kfkrj")
+stream = ExtResource("8_ngo0w")

@@ -68,7 +68,7 @@ func menu_select(id: int) -> void:
 				
 				reposition_message_window()
 				var result := await message_window.make_choice(
-					"Do you want to delete this slot?"
+					"Do you\nwant to\ndelete\nthis slot?"
 					)
 				if result == MessageWindow.Response.YES:
 					var save_file := SaveManager.load_save_file()

@@ -60,11 +60,11 @@ func start_attack(attack_name: String) -> void:
 		await start_simple_attack()
 		if (is_instance_valid(current_attack)
 			and current_attack.type != AttackDescription.Type.LASTS_FOREVER):
-				_stop_attack()
+				stop_attack()
 	else:
 		await attack_function_node.call(current_attack.function_name)
 		if is_instance_valid(current_attack):
-			_stop_attack()
+			stop_attack()
 		
 # TODO: check for cancellation after each await?
 func start_simple_attack() -> void:
@@ -112,9 +112,9 @@ func start_simple_attack() -> void:
 		else:
 			await get_tree().create_timer(current_attack.time_length, false).timeout
 		
-## Please don't call this method yourself as there may be bugs
-## because of the code being asynchronous
-func _stop_attack() -> void:
+func stop_attack() -> void:
+	if current_attack == null:
+		return
 	var save_attack := current_attack
 	current_attack = null
 	attack_finished.emit(save_attack)
@@ -136,9 +136,8 @@ func attack_body(body: Node2D) -> void:
 		return
 	if body.has_node("HealthComponent") and (enemy != body.get_node("HealthComponent").enemy) \
 		and body not in attacked_bodies:
-			body.get_node("HealthComponent").damage(
-				current_attack.damage_amount, current_attack.hurt_time
-				)
+			var hc: HealthComponent = body.get_node("HealthComponent")
+			hc.damage(current_attack.damage_amount, current_attack.hurt_time)
 			attacked.emit(body, current_attack.damage_amount)
 			body_attacked.emit(body, current_attack)
 			attacked_bodies.append(body)
