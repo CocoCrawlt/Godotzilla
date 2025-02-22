@@ -21,8 +21,9 @@ class_name PlayerSkin extends Node2D
 		
 @export_group("Attacks")
 @export var attack_animation_player: AnimationPlayer
-@export var attack_hitboxes: Node 
 @export var attacks: Array[AttackDescription]
+
+@onready var attack_hitboxes: Node2D = $Hitboxes
 
 var player: PlayerCharacter
 var attack_state_node: Node
@@ -33,6 +34,9 @@ func _ready() -> void:
 		player = get_parent()
 		attack_state_node = player.state.states_list[PlayerCharacter.State.ATTACK]
 		move_state_node = player.state.states_list[move_state]
+	
+	attack_hitboxes.hide()
+	$Collision.hide()
 
 func walk_process() -> void:
 	pass

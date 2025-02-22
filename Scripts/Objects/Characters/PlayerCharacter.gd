@@ -254,7 +254,9 @@ func set_collision(shape: CollisionShape2D) -> void:
 		if c is CollisionShape2D:
 			c.queue_free()
 		)
-	call_deferred("add_child", shape.duplicate())
+	var new_shape: CollisionShape2D = shape.duplicate()
+	new_shape.show()
+	call_deferred("add_child", new_shape)
 	
 func is_hurtable() -> bool:
 	return state not in [State.LEVEL_INTRO, State.HURT, State.DEAD]

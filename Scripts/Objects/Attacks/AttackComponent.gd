@@ -55,15 +55,14 @@ func start_attack(attack_name: String) -> void:
 	
 	if current_attack.simple_or_advanced == 0:
 		await start_simple_attack()
-		if (is_instance_valid(current_attack)
+		if (is_attacking()
 			and current_attack.type != AttackDescription.Type.LASTS_FOREVER):
 				stop_attack()
 	else:
 		await attack_function_node.call(current_attack.function_name)
-		if is_instance_valid(current_attack):
+		if is_attacking():
 			stop_attack()
 		
-# TODO: check for cancellation after each await?
 func start_simple_attack() -> void:
 	if current_attack == null:
 		null
@@ -76,6 +75,7 @@ func start_simple_attack() -> void:
 			attack_animation_player.play("RESET")
 			
 	await get_tree().process_frame
+	if not is_attacking(): return # Just in case
 	
 	if current_attack.animation_name != "" and current_attack.animation_name2 != "":
 		variation = not variation
@@ -91,10 +91,7 @@ func start_simple_attack() -> void:
 	
 	if current_attack.start_time_offset > 0.0:
 		await get_tree().create_timer(current_attack.start_time_offset, false).timeout
-		# The attack could've been requested to be stopped by now
-		# (For example, the player could've been hit)
-		if current_attack == null:
-			return
+		if not is_attacking(): return
 	
 	if current_attack.hitbox_name != "":
 		set_hitbox_template(current_attack.hitbox_name)
@@ -103,6 +100,7 @@ func start_simple_attack() -> void:
 	if current_attack.type == AttackDescription.Type.ONE_TIME:
 		for i in 3:
 			await get_tree().process_frame
+		if not is_attacking(): return
 		attack_bodies()
 		
 	if current_attack and current_attack.type != AttackDescription.Type.LASTS_FOREVER:
@@ -110,6 +108,7 @@ func start_simple_attack() -> void:
 			await attack_animation_player.animation_finished
 		else:
 			await get_tree().create_timer(current_attack.time_length, false).timeout
+	# if not is_attacking(): return
 		
 func stop_attack() -> void:
 	if current_attack == null:
@@ -139,6 +138,9 @@ func attack_body(body: Node2D) -> void:
 			hc.damage(current_attack)
 			attacked.emit(body, current_attack)
 			attacked_bodies.append(body)
+			
+func is_attacking() -> bool:
+	return current_attack != null
 	
 #region Hitbox
 
