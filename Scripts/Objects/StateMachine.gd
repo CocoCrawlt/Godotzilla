@@ -17,6 +17,8 @@ func init() -> void:
 		else:
 			i.disable()
 
+## Don't call this method directly, use "current = your_value_here".
+## Why? For consistency and for looks :D 
 func _set_state(new_state: int) -> void:
 	if current == new_state:
 		return

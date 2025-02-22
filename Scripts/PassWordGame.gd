@@ -6,8 +6,10 @@ const END_POS := Vector2i(8, 3)
 
 @export var music: AudioStream
 
+## Input selector is the selector in the upper box
 @onready var input_selector: Sprite2D = $PasswordInput/Selector
 @onready var password_node: Label = $PasswordBox/Password
+## Password selector is the selector in the lower box
 @onready var password_selector: Sprite2D = $PasswordBox/Selector
 
 # Pass Word Error nodes
@@ -15,7 +17,7 @@ const END_POS := Vector2i(8, 3)
 @onready var pwe_timer: Timer = $PWETimer
 
 var input_selector_position := Vector2i(0, 0)
-# Password selector position
+## Password selector position
 var selector_position := 0
 
 var alphabet: PackedStringArray
@@ -104,12 +106,12 @@ func leave() -> void:
 	Global.change_scene(load("res://Scenes/MainMenu/MainMenu.tscn"))
 
 func input_selector_process() -> void:
-	const LEFT_REMAPS := {
+	const LEFT_REMAPS: Dictionary[Vector2i, Vector2i] = {
 		Vector2i(0,3): END_POS,
 		RIGHT_POS: LEFT_POS,
 		END_POS: RIGHT_POS,
 	}
-	const RIGHT_REMAPS := {
+	const RIGHT_REMAPS: Dictionary[Vector2i, Vector2i] = {
 		LEFT_POS: RIGHT_POS,
 		RIGHT_POS: END_POS,
 		END_POS: Vector2i(0,3),
@@ -140,7 +142,7 @@ func input_selector_process() -> void:
 					[END_POS.x, alphabet[0].length()]
 				]
 				
-				for pos: Array in special_positions:
+				for pos: Array[int] in special_positions:
 					if input_selector_position.x in range(pos[0], pos[1]):
 						input_selector_position.x = pos[0]
 						

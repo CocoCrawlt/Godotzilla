@@ -7,6 +7,10 @@ enum State {
 	DISAPPEARING,
 }
 
+## Player's response to Yes/No choice message.
+## CANCEL is returned when the player presses action B, i.e. cancels their action.
+## UNKNOWN is returned by make_choice() if the choice message cannot be displayed
+## (the message window object is either appearing or disappearing at the moment).
 enum Response {
 	YES,
 	NO,
@@ -59,7 +63,7 @@ func _process(_delta: float) -> void:
 			choice_selector.position.x = 0
 			if selector:
 				selector.ignore_player_input = false
-	
+
 func appear(
 		message: String,
 		enable_sound := true,

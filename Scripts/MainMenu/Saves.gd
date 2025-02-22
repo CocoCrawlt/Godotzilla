@@ -16,13 +16,13 @@ extends "res://Scripts/MainMenu/Menu.gd"
 @onready var delete_text: Label = $DeleteText
 @onready var message_window: MessageWindow = $MessageWindow
 
-var save_slots: Array[Control] = []
+var save_slots: Array[SaveSlot] = []
 
 func _ready() -> void:
 	super._ready()
 	delete_text.hide()
 	save_slots.assign(get_children().filter(
-		func(c: Control) -> bool: return c.is_in_group("saveslot")
+		func(c: SaveSlot) -> bool: return c.is_in_group("saveslot") and c is SaveSlot
 		))
 	
 	var save_id := 0

@@ -1,6 +1,6 @@
 class_name ControlsSettings extends "res://Scripts/MainMenu/Menu.gd"
 
-# Section in the save file
+## Section in the save file
 const SECTION := "Input"
 
 const ACTIONS := [
@@ -8,8 +8,8 @@ const ACTIONS := [
 	"B", "A", "Select", "Start"
 ]
 
-# The controller image's regions that should be highlighted
-# when the player is configuring their input mapping
+## The controller image's regions that should be highlighted
+## when the player is configuring their input mapping
 const HIGHLIGHTS: Array[Rect2] = [
 	Rect2(23, 44, 8, 8), # Up
 	Rect2(23, 60, 8, 8), # Down

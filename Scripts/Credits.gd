@@ -42,6 +42,7 @@ func display_text() -> void:
 	var text := "[center]%s[/center]" % texts[current_text]
 	text_node.text = text
 	
+## You know, everyone has to comply with the open source licenses
 func prepare_licensing_text() -> void:
 	var result := FileAccess.open("res://LICENSE", FileAccess.READ).get_as_text()
 	

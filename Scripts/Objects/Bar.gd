@@ -6,6 +6,7 @@ enum Style {
 	STYLE2,
 }
 
+## Speed of the current (shown on screen) value to the target value
 const SPEED := 1 * 60
 
 ## Style 1 is the style for player's power and life bars.
@@ -26,9 +27,9 @@ const SPEED := 1 * 60
 @export var color2 := Color(0.71, 0.19, 0.125):
 	set(value): color2 = value; update_style()
 
-var value: float = 0
-var target_value: float = 0
-var max_value: float = 0
+var value := 0.0
+var target_value := 0.0
+var max_value := 0.0
 
 func _ready() -> void:
 	update_style()

@@ -37,10 +37,12 @@ func _process(delta: float) -> void:
 		and current_attack.type != AttackDescription.Type.ONE_TIME):
 			attack_bodies()
 	
-func start_attack(attack_name: String) -> void:
+## Start an attack with the specified name. Returns true if
+## the attack was finished successfully (haven't been stopped early by request)
+func start_attack(attack_name: String) -> bool:
 	# An attack is still playing
 	if current_attack != null:
-		return
+		return false
 		
 	# Find the attack description
 	for attack_desc in attacks:
@@ -49,21 +51,26 @@ func start_attack(attack_name: String) -> void:
 			break
 	if current_attack == null:
 		printerr("Unknown attack: " + attack_name)
-		return
+		return false
 		
 	attack_started.emit(current_attack)
 	
+	var result := false
+	
 	if current_attack.simple_or_advanced == 0:
-		await start_simple_attack()
-		if (is_attacking()
-			and current_attack.type != AttackDescription.Type.LASTS_FOREVER):
+		await _start_simple_attack()
+		if is_attacking():
+			result = true
+			if current_attack.type != AttackDescription.Type.LASTS_FOREVER:
 				stop_attack()
 	else:
-		await attack_function_node.call(current_attack.function_name)
+		result = await attack_function_node.call(current_attack.function_name)
 		if is_attacking():
+			result = true
 			stop_attack()
+	return result
 		
-func start_simple_attack() -> void:
+func _start_simple_attack() -> void:
 	if current_attack == null:
 		null
 	sfx_player.stream = current_attack.sfx

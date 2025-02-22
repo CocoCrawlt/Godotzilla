@@ -1,9 +1,12 @@
 class_name VideoSettings extends "res://Scripts/MainMenu/Menu.gd"
 
-# Section in the save file
+## Section in the save file
 const SECTION := "Video"
+# -1 means "Full screen"
 const RESOLUTIONS := [1, 2, 3, 4, -1]
 
+## Sometimes chaning the wide screen setting is not desired,
+## for example, while playing a level.
 @export var include_widescreen := true
 var current_resolution := 2
 

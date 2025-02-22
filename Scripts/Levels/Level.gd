@@ -68,6 +68,8 @@ func _process(_delta: float) -> void:
 				save_player_state()
 				next_level()
 
+## Saves player state inside its board piece if the level
+## was started from a board
 func save_player_state() -> void:
 	var board_piece: BoardPiece = data.board_piece
 	if board_piece:
@@ -95,8 +97,7 @@ func player_dead(character: PlayerCharacter,
 	Global.change_scene_node(Global.board)
 	Global.board.returned(not character.is_player)
 
-#region Code for going to the next level/planet
-
+## A method to start the next level after this level has been completed
 func next_level() -> void:
 	if OS.is_debug_build() and not Global.board:
 		get_tree().paused = true
@@ -121,5 +122,3 @@ func next_level() -> void:
 		data.board_piece.save_data() # Just in case
 		Global.change_scene_node(Global.board)
 		Global.board.returned()
-		
-#endregion

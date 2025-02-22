@@ -1,6 +1,6 @@
 class_name SoundSettings extends "res://Scripts/MainMenu/Menu.gd"
 
-# Section in the save file
+## Section in the save file
 const SECTION = "Sound"
 
 const SFX_BUS = 1

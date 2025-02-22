@@ -1,4 +1,4 @@
-extends Control
+class_name SaveSlot extends Control
 
 const BOARD_PIECE := preload("res://Objects/Boards/Piece.tscn")
 
