@@ -219,10 +219,11 @@ script = ExtResource("2_en534")
 character_info = ExtResource("3_cwrxe")
 move_state = 1
 move_speed = 2.0
-level_intro_x_start = null
 level_intro_y_offset = -40
-walk_frame_speed = null
-jump_speed = null
+intro_step_sfx_period = 15
+intro_step_sfx_start = 20
+intro_step_sfx_offset = 0
+intro_target_x = 80
 attacks = Array[ExtResource("4_qw0ix")]([SubResource("Resource_l3d0x"), SubResource("Resource_tkeyd")])
 
 [node name="Body" parent="." index="0"]

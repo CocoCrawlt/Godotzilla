@@ -33,7 +33,7 @@ func _on_timer_timeout() -> void:
 		animation = "default"
 	frame = id
 
-func _on_attack_component_attacked(body: Node2D, _amount: float) -> void:
+func _on_attack_component_attacked(body: Node2D, _attack: AttackDescription) -> void:
 	for particle in particle_array:
 		if is_instance_valid(particle):
 			particle.attack.objects_to_ignore.append(body)

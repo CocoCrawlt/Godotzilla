@@ -72,7 +72,7 @@ func menu_select(id: int) -> void:
 					)
 				if result == MessageWindow.Response.YES:
 					var save_file := SaveManager.load_save_file()
-					save_file.erase_section(SaveManager.get_save_slot_section())
+					SaveManager.erase_save_slot(save_file)
 					SaveManager.store_save_file(save_file)
 					save_slots[id].set_data_empty(id)
 					delete_text.hide()

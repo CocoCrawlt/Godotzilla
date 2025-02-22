@@ -22,14 +22,11 @@ var variation := false
 var attacked_bodies: Array[Node2D] = []
 
 ## Happens when the attack component attacks a body
-signal body_attacked(body: Node2D, attack: AttackDescription)
+signal attacked(body: Node2D, attack: AttackDescription)
 ## Happens before an attack starts
 signal attack_started(attack: AttackDescription)
 ## Happens after an attack finishes
 signal attack_finished(attack: AttackDescription)
-
-## DEPRECATED: Signal for compatibility reasons
-signal attacked(body: Node2D, amount: float)
 
 func _ready() -> void:
 	if initial_attack != "":
@@ -68,6 +65,8 @@ func start_attack(attack_name: String) -> void:
 		
 # TODO: check for cancellation after each await?
 func start_simple_attack() -> void:
+	if current_attack == null:
+		null
 	sfx_player.stream = current_attack.sfx
 	sfx_player.play()
 	
@@ -132,14 +131,13 @@ func attack_bodies() -> void:
 		attack_body(body)
 			
 func attack_body(body: Node2D) -> void:
-	if body == get_parent() or body in objects_to_ignore:
+	if body == get_parent() or body in objects_to_ignore or current_attack == null:
 		return
 	if body.has_node("HealthComponent") and (enemy != body.get_node("HealthComponent").enemy) \
 		and body not in attacked_bodies:
 			var hc: HealthComponent = body.get_node("HealthComponent")
-			hc.damage(current_attack.damage_amount, current_attack.hurt_time)
-			attacked.emit(body, current_attack.damage_amount)
-			body_attacked.emit(body, current_attack)
+			hc.damage(current_attack)
+			attacked.emit(body, current_attack)
 			attacked_bodies.append(body)
 	
 #region Hitbox

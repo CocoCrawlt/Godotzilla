@@ -10,7 +10,8 @@ class_name HealthComponent extends Node
 
 ## The current amount of health
 var target_value := 0.0
-## The amount of health that should be shown on screen
+## The amount of health that should be shown on screen.
+## If you want to change the amount of health, use "target_value" property
 var value := 0.0:
 	set(v):
 		value = v
@@ -20,11 +21,14 @@ var invincible := false
 
 ## The health amount that should be shown on screen has changed
 signal value_changed(new_value: float)
-signal damaged(amount: float, hurt_time: float)
+signal damaged(amount: float, attack: AttackDescription)
 signal healed(amount: float)
 ## Happens when the maximum amount of health changes
 signal resized(new_amount: float)
+## Happens when the health value reaches 0
 signal dead
+
+signal invincibility_started
 signal invincibility_ended
 
 func _ready() -> void:
@@ -36,18 +40,32 @@ func _process(delta: float) -> void:
 		died = true
 		dead.emit()
 
-func damage(attack: AttackDescription) -> void:
-	if attack.damage_amount <= 0 or invincible or died \
+## Make the health component decrease the health amount through an attack or
+## by specifying the damage amount. Additionally, damaging the health component
+## will start the invincibility timer, if the invincibility time was specified.
+## If you don't have an AttackDescription object, pass null as the first argument.
+func damage(attack: AttackDescription, amount := -1.0) -> void:
+	var attack_damage := amount
+	if attack != null:
+		attack_damage = attack.damage_amount
+	if attack_damage <= 0 or invincible or died \
 		or (get_parent().has_method("is_hurtable") and not get_parent().is_hurtable()):
 			return
 	
-	target_value = clampf(target_value - attack.damage_amount, 0.0, max_value)
-	damaged.emit(attack)
+	target_value = clampf(target_value - attack_damage, 0.0, max_value)
+	damaged.emit(attack, attack_damage)
 	if invincibility_time_seconds > 0.0:
 		invincible = true
+		invincibility_started.emit()
+		
 		await get_tree().create_timer(invincibility_time_seconds, false).timeout
+		
 		invincible = false
 		invincibility_ended.emit()
+		
+## Convenience method for calling damage(null, the_amount_specified_here)
+func damage_amount(amount: float) -> void:
+	damage(null, amount)
 		
 func heal(amount: float) -> void:
 	if amount <= 0 or target_value >= max_value or died:
@@ -61,17 +79,21 @@ func heal(amount: float) -> void:
 		target_value = max_value
 		healed.emit(max_value - old_value)
 		
+## Set the health value to its maximum value
 func fill() -> void:
 	set_value(max_value)
 		
+## Change the maximum value of health
 func resize(new_hp_amount: float) -> void:
 	max_value = new_hp_amount
 	resized.emit(new_hp_amount)
 	
+## Change the maximum value of health and fill the health bar
 func resize_and_fill(new_hp_amount: float) -> void:
 	resize(new_hp_amount)
 	fill()
 	
+## Change the target health value and the current health value
 func set_value(new_value: float) -> void:
 	target_value = minf(new_value, max_value)
 	value = target_value

@@ -4,6 +4,7 @@ const PAUSE_MENU := preload("res://Scenes/MainMenu/PauseMenu.tscn")
 
 var previous_scene: Node
 
+signal pause_started
 signal pause_finished
 
 func accept_pause() -> void:
@@ -21,6 +22,8 @@ func start_pause() -> void:
 	
 	Global.music.stream_paused = true
 	Global.play_global_sfx("Pause")
+	
+	pause_started.emit()
 
 func finish_pause() -> void:
 	var current_pause_menu := Global.get_current_scene()

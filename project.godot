@@ -49,6 +49,7 @@ naming/scene_name_casing=1
 [file_customization]
 
 folder_colors={
+"res://Audio/": "teal",
 "res://Objects/": "orange",
 "res://Scenes/": "purple",
 "res://Scripts/": "blue",

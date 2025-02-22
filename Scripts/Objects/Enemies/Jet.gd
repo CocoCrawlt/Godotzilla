@@ -47,7 +47,7 @@ func _process(delta: float) -> void:
 func _on_attack_component_attacked(_body: Node2D, _amount: float) -> void:
 	_on_health_component_dead()
 	
-func _on_health_component_damaged(_amount: float, _hurt_time: float) -> void:
+func _on_health_component_damaged(_amount: float, _attack: AttackDescription) -> void:
 	pass
 	
 func _on_health_component_dead() -> void:

@@ -13,6 +13,12 @@ class_name PlayerSkin extends Node2D
 @export var walk_frame_speed := 9.0
 @export var jump_speed := -2 * 60
 
+@export_group("Gameplay-specific stats/Level Intro", "intro_")
+@export var intro_step_sfx_period := 30
+@export var intro_step_sfx_start := 15
+@export var intro_step_sfx_offset := 10
+@export var intro_target_x := 64
+		
 @export_group("Attacks")
 @export var attack_animation_player: AnimationPlayer
 @export var attack_hitboxes: Node 

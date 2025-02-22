@@ -60,8 +60,11 @@ func load_save_file() -> ConfigFile:
 func store_save_file(file: ConfigFile) -> void:
 	if save_slot_id >= 0:
 		file.save_encrypted_pass(SAVE_FILE_PATH, SAVE_FILE_PASS)
+		
+func erase_save_slot(file: ConfigFile, slot := save_slot_id) -> void:
+	file.erase_section(SaveManager.get_save_slot_section(slot))
 
-func get_save_slot_section() -> String:
-	return "save" + str(save_slot_id+1)
+func get_save_slot_section(slot := save_slot_id) -> String:
+	return "save" + str(slot+1)
 
 #endregion

@@ -24,7 +24,7 @@ func _physics_process(delta: float) -> void:
 func _on_health_component_dead() -> void:
 	velocity.x = -velocity.x
 
-func _on_attack_component_attacked(_body: Node2D, _amount: float) -> void:
+func _on_attack_component_attacked(_body: Node2D, _attack: AttackDescription) -> void:
 	var explosion := EXPLOSION.instantiate()
 	explosion.global_position = global_position
 	add_sibling(explosion)

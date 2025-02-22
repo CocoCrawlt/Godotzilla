@@ -259,8 +259,9 @@ func set_collision(shape: CollisionShape2D) -> void:
 func is_hurtable() -> bool:
 	return state not in [State.LEVEL_INTRO, State.HURT, State.DEAD]
 
-func _on_health_damaged(_amount: float, hurt_time: float) -> void:
+func _on_health_damaged(_amount: float, attack: AttackDescription) -> void:
 	var attack_state := $StateMachine/Attack
+	var hurt_time := attack.hurt_time if attack != null else 0.0
 	if(state.current == State.ATTACK
 		and attack_state.current_attack.name == "HeatBeam"):
 			hurt_time = 0
@@ -301,10 +302,10 @@ func save_state(data: BoardPiece.CharacterData) -> void:
 	data.level = level
 	data.xp = xp
 
-func _on_attack_component_attacked(attacked_body: Node2D, amount: float) -> void:
+func _on_attack_component_attacked(attacked_body: Node2D, attack: AttackDescription) -> void:
 	if attacked_body is Enemy:
 		add_xp(5)
-		Global.add_score(int(20 * amount))
+		Global.add_score(int(20 * attack.damage_amount))
 		
 static func get_character_info(char_id: PlayerCharacter.Type) -> CharacterInfo:
 	return load(SKINS[char_id][1])

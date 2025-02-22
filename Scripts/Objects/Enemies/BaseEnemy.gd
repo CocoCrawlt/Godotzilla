@@ -3,7 +3,7 @@ class_name Enemy extends StaticBody2D
 @onready var health_component := $HealthComponent
 @onready var attack_component := $AttackComponent
 
-func _on_health_component_damaged(_amount: float, _hurt_time: float) -> void:
+func _on_health_component_damaged(_amount: float, _attack: AttackDescription) -> void:
 	# print("Oh no, I was damaged!!11 Nooo1oo!O")
 	pass
 

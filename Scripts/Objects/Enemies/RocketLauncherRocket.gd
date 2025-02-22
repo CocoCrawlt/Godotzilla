@@ -28,7 +28,7 @@ func _process(delta: float) -> void:
 	if position.y > limit:
 		queue_free()
 
-func _on_attack_component_attacked(_body: Node2D, _amount: float) -> void:
+func _on_attack_component_attacked(_body: Node2D, _attack: AttackDescription) -> void:
 	var explosion := EXPLOSION.instantiate()
 	explosion.global_position = global_position
 	add_sibling(explosion)

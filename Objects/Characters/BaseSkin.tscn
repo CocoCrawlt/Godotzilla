@@ -10,7 +10,7 @@ size = Vector2(20, 65)
 [node name="Character" type="Node2D" node_paths=PackedStringArray("attack_animation_player", "attack_hitboxes")]
 script = ExtResource("1_qcc0a")
 attack_animation_player = NodePath("AnimationPlayer")
-attack_hitboxes = NodePath("Hitboxes")
+attack_hitboxes = NodePath("")
 
 [node name="Body" type="AnimatedSprite2D" parent="."]
 
@@ -20,7 +20,7 @@ attack_hitboxes = NodePath("Hitboxes")
 position = Vector2(0, -5.5)
 shape = SubResource("RectangleShape2D_d8cwk")
 
-[node name="Hitboxes" type="Node" parent="."]
+[node name="Hitboxes" type="Node2D" parent="."]
 
 [node name="SFX" type="Node" parent="."]
 
