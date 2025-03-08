@@ -6,16 +6,15 @@ extends "res://Scripts/Objects/Characters/States/PlayerState.gd"
 
 var walk_frame := 0.0
 var walk_frames := 0
-var walk_frame_speed := 0
 
 var jumping := false
-var jump_speed := 0.0
+var parameters: PlayerSkin
 
 func state_init() -> void:
 	if not player.is_flying():
 		walk_frames = player.body.sprite_frames.get_frame_count("Idle")
-	walk_frame_speed = player.skin.walk_frame_speed
-	jump_speed = player.skin.jump_speed
+		
+	parameters = player.skin
 
 func _process(delta: float) -> void:
 	move(delta)
@@ -30,7 +29,7 @@ func move(delta: float) -> void:
 			player.direction = int(signf(dirx))
 			
 		walk_frame = wrapf(
-			walk_frame + walk_frame_speed * delta * dirx * player.direction,
+			walk_frame + parameters.walking_walk_animation_speed * delta * dirx * player.direction,
 			0, walk_frames)
 			
 		if player.body.animation == "Idle":
@@ -42,7 +41,7 @@ func move(delta: float) -> void:
 	
 	# Jump!
 	if player.is_on_floor() and diry < -0.4:
-		player.velocity.y = jump_speed
+		player.velocity.y = parameters.walking_jump_speed
 		jumping = true
 	
 	# Variable jump height

@@ -142,8 +142,8 @@ func setup_character(skin: PlayerSkin) -> void:
 	move_state = skin.move_state
 	move_speed = skin.move_speed * 60
 	if state.current == State.LEVEL_INTRO and is_player and enable_intro:
-		position.x = skin.level_intro_x_start
-		position.y += skin.level_intro_y_offset
+		position.x = skin.intro_start_x
+		position.y += skin.intro_y_offset
 	
 	attack.hitboxes = skin.attack_hitboxes
 	attack.attack_animation_player = skin.attack_animation_player

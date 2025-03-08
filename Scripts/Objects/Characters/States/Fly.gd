@@ -1,6 +1,5 @@
 extends "res://Scripts/Objects/Characters/States/PlayerState.gd"
 
-const YLIMIT = 72
 var floor_checking: Area2D
 
 func state_init() -> void:
@@ -14,13 +13,13 @@ func _process(_delta: float) -> void:
 
 func move(delta: float) -> void:
 	var xspeed: float = player.move_speed
-	var ylimit := YLIMIT
+	var ylimit := player.skin.flying_top_y_limit
 	
 	var camera := get_viewport().get_camera_2d()
 	if camera != null:
 		ylimit += camera.limit_top
 		if camera.is_camera_moving():
-			xspeed = 1 * 60
+			xspeed = player.skin.flying_move_speed_2
 		
 	player.velocity.x = signf(player.inputs[player.Inputs.XINPUT]) * xspeed
 	player.velocity.y = signf(player.inputs[player.Inputs.YINPUT]) * player.move_speed
@@ -28,7 +27,8 @@ func move(delta: float) -> void:
 	if player.allow_direction_changing and signf(player.inputs[player.Inputs.XINPUT]) != 0:
 		player.direction = signf(player.inputs[player.Inputs.XINPUT])
 	
-	floor_checking.position.y = player.velocity.y * delta
+	floor_checking.position.y = \
+		player.skin.flying_floor_check_y_offset + player.velocity.y * delta
 	
 	if Global.get_current_scene().has_node("HUD"):
 		ylimit += Global.get_current_scene().get_node("HUD").vertical_size

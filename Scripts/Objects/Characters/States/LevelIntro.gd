@@ -10,7 +10,7 @@ func _physics_process(delta: float) -> void:
 	
 	if not player.is_flying():
 		move_state.walk_frame = wrapf(
-			move_state.walk_frame + move_state.walk_frame_speed * delta,
+			move_state.walk_frame + move_state.parameters.walking_walk_animation_speed * delta,
 			0, move_state.walk_frames)
 		player.body.frame = int(move_state.walk_frame)
 		
