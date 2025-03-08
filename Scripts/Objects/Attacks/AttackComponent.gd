@@ -58,21 +58,29 @@ func start_attack(attack_name: String) -> bool:
 	var result := false
 	
 	if current_attack.simple_or_advanced == 0:
-		await _start_simple_attack()
-		if is_attacking():
-			result = true
-			if current_attack.type != AttackDescription.Type.LASTS_FOREVER:
-				stop_attack()
-	else:
-		result = await attack_function_node.call(current_attack.function_name)
+		result = await _start_simple_attack()
+	elif current_attack.simple_or_advanced == 1:
+		await attack_function_node.call(current_attack.function_name)
 		if is_attacking():
 			result = true
 			stop_attack()
+	else:
+		attack_function_node.call(current_attack.function_name)
+		result = await _start_simple_attack()
+	return result
+	
+func _start_simple_attack() -> bool:
+	var result := false
+	await _simple_attack()
+	if is_attacking():
+		result = true
+		if current_attack.type != AttackDescription.Type.LASTS_FOREVER:
+			stop_attack()
 	return result
 		
-func _start_simple_attack() -> void:
+func _simple_attack() -> void:
 	if current_attack == null:
-		null
+		return
 	sfx_player.stream = current_attack.sfx
 	sfx_player.play()
 	
@@ -125,7 +133,7 @@ func stop_attack() -> void:
 	attack_finished.emit(save_attack)
 	set_hitbox_node(null, Vector2.ZERO)
 	attacked_bodies = []
-	if (save_attack.simple_or_advanced == 0
+	if ((save_attack.simple_or_advanced == 0 or save_attack.simple_or_advanced == 2)
 		and save_attack.reset_animation_after
 		and is_instance_valid(attack_animation_player)
 		and attack_animation_player.has_animation("RESET")):

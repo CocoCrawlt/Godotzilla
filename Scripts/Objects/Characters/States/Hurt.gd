@@ -1,4 +1,4 @@
-extends "res://Scripts/Objects/Characters/PlayerState.gd"
+extends "res://Scripts/Objects/Characters/States/PlayerState.gd"
 
 @onready var timer := Timer.new()
 var hurt_time := 0.0

@@ -21,6 +21,8 @@ class_name PlayerSkin extends Node2D
 		
 @export_group("Attacks")
 @export var attack_animation_player: AnimationPlayer
+@export var attack_function_callback_node: Node
+## The Advanced function callbacks will be called on this skin object
 @export var attacks: Array[AttackDescription]
 
 @onready var attack_hitboxes: Node2D = $Hitboxes

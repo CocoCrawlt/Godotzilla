@@ -7,9 +7,10 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d8cwk"]
 size = Vector2(20, 65)
 
-[node name="Character" type="Node2D" node_paths=PackedStringArray("attack_animation_player")]
+[node name="Character" type="Node2D" node_paths=PackedStringArray("attack_animation_player", "attack_function_callback_node")]
 script = ExtResource("1_qcc0a")
 attack_animation_player = NodePath("AnimationPlayer")
+attack_function_callback_node = NodePath(".")
 
 [node name="Body" type="AnimatedSprite2D" parent="."]
 

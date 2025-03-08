@@ -1,4 +1,4 @@
-extends "res://Scripts/Objects/Characters/PlayerState.gd"
+extends "res://Scripts/Objects/Characters/States/PlayerState.gd"
 
 const YLIMIT = 72
 var floor_checking: Area2D

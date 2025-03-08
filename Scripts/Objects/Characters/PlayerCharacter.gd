@@ -148,7 +148,7 @@ func setup_character(skin: PlayerSkin) -> void:
 	attack.hitboxes = skin.attack_hitboxes
 	attack.attack_animation_player = skin.attack_animation_player
 	attack.attacks.assign(skin.attacks)
-	attack.attack_function_node = skin
+	attack.attack_function_node = skin.attack_function_callback_node
 	
 #region Input related
 	

@@ -44,7 +44,7 @@ func _process(delta: float) -> void:
 		
 	position += velocity * delta
 
-func _on_attack_component_attacked(_body: Node2D, _amount: float) -> void:
+func _on_attack_component_attacked(_body: Node2D, _attack: AttackDescription) -> void:
 	_on_health_component_dead()
 	
 func _on_health_component_damaged(_amount: float, _attack: AttackDescription) -> void:

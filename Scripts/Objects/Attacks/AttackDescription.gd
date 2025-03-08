@@ -7,7 +7,8 @@ enum Type {
 }
 
 @export var name: String
-@export_enum("Simple:0", "Advanced:1") var simple_or_advanced: int
+@export_enum("Simple:0", "Advanced:1", "Simple & Advanced:2")
+var simple_or_advanced: int
 @export var other_information: Array[String]
 
 @export_group("Simple Attack")
@@ -42,6 +43,8 @@ enum Type {
 ## the usual attack component code will *not* be called, but instead
 ## this function inside of "Attack Function Node" from "Callbacks" section
 ## of attack component is called.
+## The usual attack component code *will* be called though if the attack
+## is selected as "Simple & Advanced".
 ## Example of when this is useful: Godzilla's Heat Beam, since it needs
 ## to have special treatment instead of being a simple animation with damage.
 @export var function_name: String

@@ -1,4 +1,4 @@
-extends "res://Scripts/Objects/Characters/PlayerState.gd"
+extends "res://Scripts/Objects/Characters/States/PlayerState.gd"
 
 # Move state is used for characters that walk on the ground.
 # This state consists of not only walking but also crouching and jumping.

@@ -53,7 +53,7 @@ func damage(attack: AttackDescription, amount := -1.0) -> void:
 			return
 	
 	target_value = clampf(target_value - attack_damage, 0.0, max_value)
-	damaged.emit(attack, attack_damage)
+	damaged.emit(attack_damage, attack)
 	if invincibility_time_seconds > 0.0:
 		invincible = true
 		invincibility_started.emit()
