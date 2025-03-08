@@ -22,7 +22,7 @@ func _ready() -> void:
 	super._ready()
 	delete_text.hide()
 	save_slots.assign(get_children().filter(
-		func(c: SaveSlot) -> bool: return c.is_in_group("saveslot") and c is SaveSlot
+		func(c: Node) -> bool: return c is SaveSlot
 		))
 	
 	var save_id := 0

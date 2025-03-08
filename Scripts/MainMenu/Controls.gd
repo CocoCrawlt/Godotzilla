@@ -23,9 +23,13 @@ const HIGHLIGHTS: Array[Rect2] = [
 
 @onready var current_button: Label = $CurrentButton
 @onready var reset_controls: Label = $ResetControls
+@onready var key_already_mapped: Label = $KeyAlreadyMapped
 
 var current_input := 0
 var mapping: Array[InputEvent] = []
+
+func _ready() -> void:
+	key_already_mapped.hide()
 
 func menu_enter() -> void:
 	reset_controls.text = reset_controls.text.replace("key",
@@ -37,6 +41,9 @@ func menu_enter() -> void:
 	mapping.fill(null)
 
 func _input(event: InputEvent) -> void:
+	if key_already_mapped.visible:
+		return
+		
 	if event is InputEventKey and event.is_pressed() and not event.is_echo():
 		if event.keycode == KEY_ESCAPE:
 			exit()
@@ -68,6 +75,17 @@ func update_current_action(event: InputEvent) -> void:
 	mapping[current_input] = event
 	
 func process_input(event: InputEvent) -> void:
+	# Checking if the event was already mapped to a different action
+	var mapping_str: Array[String] = []
+	mapping_str.assign(mapping.map(func(m: InputEvent) -> String:
+		return m.as_text() if m != null else ""
+		))
+	if event.as_text() in mapping_str:
+		key_already_mapped.show()
+		await get_tree().create_timer(1).timeout
+		key_already_mapped.hide()
+		return
+	
 	update_current_action(event)
 	next_input()
 	
