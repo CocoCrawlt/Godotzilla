@@ -2,7 +2,7 @@ extends Node2D
 
 func _ready() -> void:
 	RenderingServer.set_default_clear_color(Color.BLACK)
-	Global.play_music(preload("res://Audio/Soundtrack/TitleScreen.ogg"))
+	Global.play_music(preload("res://Audio/Soundtrack/MainMenu.ogg"))
 	
 	$BeforeFlash.visible = true
 	$AfterFlash.visible = false
@@ -37,7 +37,6 @@ func leave() -> void:
 	if not Global.is_fading():
 		get_tree().paused = true
 		
-		Global.music_fade_out()
 		await Global.fade_out(Global.FadeColor.BLACK)
 		
 		await get_tree().create_timer(0.5).timeout

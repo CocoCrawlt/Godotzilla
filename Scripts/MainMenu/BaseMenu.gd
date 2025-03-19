@@ -7,6 +7,8 @@ var selector_option := 0
 var current_menu: Node2D
 
 func _ready() -> void:
+	if music != preload("res://Audio/Soundtrack/MainMenu.ogg"):
+		Global.play_music(preload("res://Audio/Soundtrack/MainMenu.ogg"))
 	RenderingServer.set_default_clear_color(Color.BLACK)
 	
 	# Disable every menu when starting up
@@ -16,8 +18,6 @@ func _ready() -> void:
 	set_menu(%MenuMain)
 	
 	Global.hide_fade()
-	if music:
-		Global.play_music(music)
 
 func _process(_delta: float) -> void:
 	if selector.is_processing():
